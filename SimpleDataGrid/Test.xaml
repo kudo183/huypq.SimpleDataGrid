@@ -1,0 +1,22 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SimpleDataGrid"
+             xmlns:SimpleDataGrid="clr-namespace:SimpleDataGrid" x:Class="SimpleDataGrid.Test"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static SimpleDataGrid:DesignTimeTestData.ViewModel}"
+             d:DesignHeight="300">
+    
+    <SimpleDataGrid:EditableGridView x:Name="gridView">
+        <SimpleDataGrid:EditableGridView.Columns>
+            <DataGridTextColumn Width="100" Header="Name" Binding="{Binding Name}"/>
+            <DataGridTextColumn Width="150" Header="TestReferenceDataID" Binding="{Binding TestReferenceDataID}"/>
+        </SimpleDataGrid:EditableGridView.Columns>
+        <SimpleDataGrid:EditableGridView.CustomMenuItems>
+            <Button Tag="btnSet" Content="Set as selected version" Margin="5"/>
+        </SimpleDataGrid:EditableGridView.CustomMenuItems>
+    </SimpleDataGrid:EditableGridView>
+    
+</UserControl>

@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="SimpleDataGrid.Pager"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d">
+    <StackPanel Orientation="Horizontal">
+        <CheckBox IsChecked="{Binding IsEnablePaging}" Width="20" VerticalAlignment="Center"/>
+        <TextBlock Text="Trang"
+                   VerticalAlignment="Center"
+                   FontSize="12"
+                   Margin="5,0,5,0"/>
+        <TextBox Width="40"
+                 VerticalContentAlignment="Center"
+                 FontSize="12"
+                 Text="{Binding CurrentPageIndex}"
+                 IsEnabled="{Binding IsEnablePaging}"/>
+        <TextBlock Text=" tren "
+                   VerticalAlignment="Center"
+                   FontSize="12"/>
+        <TextBlock VerticalAlignment="Center"
+                   FontSize="12"
+                   Margin="0,0,5,0"
+                   Text="{Binding PageCount}"/>
+        <Button Content="&lt;"
+                Width="35"
+                VerticalAlignment="Center"
+                FontSize="12"
+                IsEnabled="{Binding IsEnablePaging}"
+                Command="{Binding PrevCommand}"/>
+        <Button x:Name="NextPageButton"
+                Content="&gt;"
+                Width="35"
+                VerticalAlignment="Center"
+                FontSize="12"
+                IsEnabled="{Binding IsEnablePaging}"
+                Command="{Binding NextCommand}"/>
+        <TextBlock VerticalAlignment="Center"
+                   Margin="5,0,5,0"
+                   FontSize="12"
+                   Text="{Binding ItemCount}"/>
+        <TextBlock Text="Dong"
+                   VerticalAlignment="Center"
+                   FontSize="12"/>
+    </StackPanel>
+</UserControl>
