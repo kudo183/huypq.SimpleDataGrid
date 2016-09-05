@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using SimpleDataGrid.DataGridColumnHeaderFilterModel;
+using SimpleDataGrid.ViewModel;
 
 namespace SimpleDataGrid
 {

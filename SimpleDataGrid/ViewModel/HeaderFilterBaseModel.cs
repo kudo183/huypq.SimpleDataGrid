@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace SimpleDataGrid.DataGridColumnHeaderFilterModel
+namespace SimpleDataGrid.ViewModel
 {
     public abstract class HeaderFilterBaseModel : INotifyPropertyChanged
     {
@@ -44,7 +44,22 @@ namespace SimpleDataGrid.DataGridColumnHeaderFilterModel
             }
         }
 
-        public abstract object GetFilterValue();
+        private object _filterValue;
+        public object FilterValue
+        {
+            get { return _filterValue; }
+            set
+            {
+                if (_filterValue == value)
+                {
+                    return;
+                }
+
+                _filterValue = value;
+                OnPropertyChanged("FilterValue");
+            }
+        }
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)

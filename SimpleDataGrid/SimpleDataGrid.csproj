@@ -44,10 +44,22 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomDatePicker.xaml.cs">
+      <DependentUpon>CustomDatePicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataGridCheckBoxColumnExt.xaml.cs">
+      <DependentUpon>DataGridCheckBoxColumnExt.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataGridComboBoxColumnExt.xaml.cs">
       <DependentUpon>DataGridComboBoxColumnExt.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataGridDateColumn.xaml.cs">
+      <DependentUpon>DataGridDateColumn.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataGridExt.cs" />
+    <Compile Include="DataGridTextColumnExt.xaml.cs">
+      <DependentUpon>DataGridTextColumnExt.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DesignTimeTestData.cs" />
     <Compile Include="EditableGridView.xaml.cs">
       <DependentUpon>EditableGridView.xaml</DependentUpon>
@@ -64,6 +76,7 @@
     <Compile Include="Utils\DataBinderUtils.cs" />
     <Compile Include="Utils\VisualTreeUtils.cs" />
     <Compile Include="ViewModel\EditableGridViewModel.cs" />
+    <Compile Include="ViewModel\HeaderCheckFilterModel.cs" />
     <Compile Include="ViewModel\HeaderComboBoxFilterModel.cs" />
     <Compile Include="ViewModel\HeaderDateFilterModel.cs" />
     <Compile Include="ViewModel\HeaderFilterBaseModel.cs" />
@@ -71,7 +84,23 @@
     <Compile Include="ViewModel\PagerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="CustomDatePicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataGridCheckBoxColumnExt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="DataGridComboBoxColumnExt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataGridDateColumn.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataGridTextColumnExt.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

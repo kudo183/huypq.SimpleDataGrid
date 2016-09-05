@@ -1,4 +1,4 @@
-﻿namespace SimpleDataGrid.DataGridColumnHeaderFilterModel
+﻿namespace SimpleDataGrid.ViewModel
 {
     public class HeaderComboBoxFilterModel : HeaderFilterBaseModel
     {
@@ -21,30 +21,6 @@
                 _itemSource = value;
                 OnPropertyChanged("ItemSource");
             }
-        }
-
-        private object _selectedValue;
-        public object SelectedValue
-        {
-            get { return _selectedValue; }
-            set
-            {
-                if (_selectedValue == value)
-                {
-                    return;
-                }
-
-                _selectedValue = value;
-                OnPropertyChanged("SelectedValue");
-            }
-        }
-
-        public override object GetFilterValue()
-        {
-            if (IsUsed == false)
-                return null;
-
-            return SelectedValue;
         }
     }
 }

@@ -11,8 +11,17 @@
     
     <SimpleDataGrid:EditableGridView x:Name="gridView">
         <SimpleDataGrid:EditableGridView.Columns>
-            <DataGridTextColumn Width="100" Header="Name" Binding="{Binding Name}"/>
-            <DataGridTextColumn Width="150" Header="TestReferenceDataID" Binding="{Binding TestReferenceDataID}"/>
+            <SimpleDataGrid:DataGridTextColumnExt Width="150" Header="{x:Static SimpleDataGrid:DesignTimeTestData.TestTextHeader}" Binding="{Binding Name}"/>
+            <SimpleDataGrid:DataGridDateColumn Width="250" Header="{x:Static SimpleDataGrid:DesignTimeTestData.TestDateHeader}" Binding="{Binding Date}"/>
+            <SimpleDataGrid:DataGridCheckBoxColumnExt Width="50" Header="{x:Static SimpleDataGrid:DesignTimeTestData.TestCheckHeader}" Binding="{Binding Check}"/>
+            <SimpleDataGrid:DataGridComboBoxColumnExt Width="300"
+                                                      Header="{x:Static SimpleDataGrid:DesignTimeTestData.TestComboBoxHeader}"
+                                                      TextBinding="{Binding ReferenceData.Name, Mode=OneWay}"
+                                                      DisplayMemberPath="Name"
+                                                      SelectedValuePath="ID"
+                                                      SelectedValueBinding="{Binding TestReferenceDataID, UpdateSourceTrigger=PropertyChanged}"
+                                                      SelectedItemBinding="{Binding ReferenceData, UpdateSourceTrigger=PropertyChanged}"
+                                                      ItemsSource="{Binding TestReferenceDataList}"/>
         </SimpleDataGrid:EditableGridView.Columns>
         <SimpleDataGrid:EditableGridView.CustomMenuItems>
             <Button Tag="btnSet" Content="Set as selected version" Margin="5"/>

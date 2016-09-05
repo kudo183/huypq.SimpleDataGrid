@@ -24,7 +24,7 @@
                                     <CheckBox Grid.Column="1" VerticalAlignment="Center" Margin="5" IsChecked="{Binding Path=IsUsed}"/>
                                     <SimpleDataGrid:TextBoxExt
                                         Grid.Column="2"
-                                        Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
+                                        Text="{Binding FilterValue, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
                                         IsUseEnterKeyPressBinding="True"
                                         Margin="3,0,3,0"
                                         IsEnabled="{Binding Path=IsUsed}"/>
@@ -53,7 +53,7 @@
                                     <CheckBox Grid.Column="1" VerticalAlignment="Center" Margin="5" IsChecked="{Binding Path=IsUsed}"/>
                                     <ComboBox Grid.Column="2" Margin="3,0,3,0"
                                               ItemsSource="{Binding ItemSource}"
-                                              SelectedValue="{Binding SelectedValue}"
+                                              SelectedValue="{Binding FilterValue}"
                                               DisplayMemberPath="Value"
                                               SelectedValuePath="Key"
                                               IsEnabled="{Binding Path=IsUsed}"/>

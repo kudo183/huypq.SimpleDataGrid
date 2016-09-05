@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SimpleDataGrid.DataGridColumnHeaderFilterModel;
 using SimpleDataGrid.ViewModel;
 
 namespace SimpleDataGrid
@@ -19,44 +15,87 @@ namespace SimpleDataGrid
     {
         public string Name { get; set; }
         public int TestReferenceDataID { get; set; }
+        public DateTime Date { get; set; }
+        public bool Check { get; set; }
 
         public TestReferenceData ReferenceData { get; set; }
         public List<TestReferenceData> TestReferenceDataList { get; set; }
     }
 
+    public class TestViewModel : EditableGridViewModel<TestData>
+    {
+    }
+
     public static class DesignTimeTestData
     {
-        private static HeaderTextFilterModel _header_BaiXe;
-        public static HeaderTextFilterModel Header_BaiXe
+        private static HeaderTextFilterModel _testTextHeader;
+        public static HeaderTextFilterModel TestTextHeader
         {
             get
             {
-                if (_header_BaiXe != null)
-                {
-                    return _header_BaiXe;
-                }
+                if (_testTextHeader != null)
+                    return _testTextHeader;
 
-                _header_BaiXe = new HeaderTextFilterModel("BaiXe");
-                return _header_BaiXe;
+                _testTextHeader = new HeaderTextFilterModel("Name");
+                return _testTextHeader;
             }
         }
 
-        private static EditableGridViewModel<TestData> _viewModel;
-        public static EditableGridViewModel<TestData> ViewModel
+        private static HeaderDateFilterModel _testDateHeader;
+        public static HeaderDateFilterModel TestDateHeader
+        {
+            get
+            {
+                if (_testDateHeader != null)
+                    return _testDateHeader;
+
+                _testDateHeader = new HeaderDateFilterModel("Date");
+                return _testDateHeader;
+            }
+        }
+
+        private static HeaderComboBoxFilterModel _testComboBoxHeader;
+        public static HeaderComboBoxFilterModel TestComboBoxHeader
+        {
+            get
+            {
+                if (_testComboBoxHeader != null)
+                    return _testComboBoxHeader;
+
+                _testComboBoxHeader = new HeaderComboBoxFilterModel("Reference");
+                return _testComboBoxHeader;
+            }
+        }
+
+        private static HeaderCheckFilterModel _testCheckHeader;
+        public static HeaderCheckFilterModel TestCheckHeader
+        {
+            get
+            {
+                if (_testCheckHeader != null)
+                    return _testCheckHeader;
+
+                _testCheckHeader = new HeaderCheckFilterModel("Check");
+                return _testCheckHeader;
+            }
+        }
+
+        private static TestViewModel _viewModel;
+        public static TestViewModel ViewModel
         {
             get
             {
                 if (_viewModel != null)
                     return _viewModel;
 
-                _viewModel = new EditableGridViewModel<TestData>();
+                _viewModel = new TestViewModel();
                 _viewModel.Entities = new ObservableCollection<TestData>(Entities);
                 _viewModel.PagerViewModel = new PagerViewModel()
-                                                {
-                                                    CurrentPageIndex = 1,
-                                                    ItemCount = 3,
-                                                    PageCount = 5
-                                                };
+                {
+                    CurrentPageIndex = 1,
+                    ItemCount = 3,
+                    PageCount = 5
+                };
                 return _viewModel;
             }
         }
@@ -82,6 +121,8 @@ namespace SimpleDataGrid
                                new TestData()
                                    {
                                        Name = "name 1",
+                                       Date = DateTime.Now,
+                                       Check = true,
                                        TestReferenceDataID = 1,
                                        ReferenceData = new TestReferenceData() {ID = 1, Name = "Ref 1"},
                                        TestReferenceDataList = referenceDataList
@@ -89,6 +130,8 @@ namespace SimpleDataGrid
                                new TestData()
                                    {
                                        Name = "name 2",
+                                       Check = false,
+                                       Date = DateTime.Now.AddDays(1),
                                        TestReferenceDataID = 2,
                                        ReferenceData = new TestReferenceData() {ID = 2, Name = "Ref 2"},
                                        TestReferenceDataList = referenceDataList
@@ -96,6 +139,8 @@ namespace SimpleDataGrid
                                new TestData()
                                    {
                                        Name = "name 3",
+                                       Check = false,
+                                       Date = DateTime.Now.AddDays(2),
                                        TestReferenceDataID = 3,
                                        ReferenceData = new TestReferenceData() {ID = 3, Name = "Ref 3"},
                                        TestReferenceDataList = referenceDataList
@@ -103,6 +148,8 @@ namespace SimpleDataGrid
                                new TestData()
                                    {
                                        Name = "name 4",
+                                       Check = true,
+                                       Date = DateTime.Now.AddDays(3),
                                        TestReferenceDataID = 4,
                                        ReferenceData = new TestReferenceData() {ID = 4, Name = "Ref 4"},
                                        TestReferenceDataList = referenceDataList
