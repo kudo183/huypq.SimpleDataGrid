@@ -1,0 +1,22 @@
+﻿<Window x:Class="SimpleDataGridTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimpleDataGridTest"
+        xmlns:SimpleDataGrid="clr-namespace:SimpleDataGrid;assembly=SimpleDataGrid"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <SimpleDataGrid:EditableGridView x:Name="gridView" Button.Click="EditableGridView_Click">
+        <SimpleDataGrid:EditableGridView.Columns>
+            <SimpleDataGrid:DataGridComboBoxColumnExt Width="100"
+                                                      Header="Combobox"
+                                                      TextBinding="{Binding ChildData.Id, Mode=OneWay}"
+                                                      DisplayMemberPath="Name"
+                                                      SelectedValuePath="Id"
+                                                      SelectedValueBinding="{Binding ChildDataId, UpdateSourceTrigger=PropertyChanged}"
+                                                      SelectedItemBinding="{Binding ChildData, UpdateSourceTrigger=PropertyChanged}"
+                                                      ItemsSource="{Binding ChildDatas}"/>
+        </SimpleDataGrid:EditableGridView.Columns>
+    </SimpleDataGrid:EditableGridView>
+</Window>
