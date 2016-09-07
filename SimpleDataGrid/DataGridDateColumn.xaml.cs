@@ -14,10 +14,7 @@ namespace SimpleDataGrid
         public DataGridDateColumn()
         {
             InitializeComponent();
-            FontSize = 16;
         }
-
-        public double FontSize { get; set; }
 
         protected override void CancelCellEdit(FrameworkElement editingElement, object uneditedValue)
         {
@@ -29,7 +26,7 @@ namespace SimpleDataGrid
         }
         protected override FrameworkElement GenerateEditingElement(DataGridCell cell, object dataItem)
         {
-            var dp = new DatePicker { FontSize = FontSize };
+            var dp = new DatePicker { };
             dp.SetBinding(DatePicker.SelectedDateProperty, Binding);
 
             return dp;
@@ -37,7 +34,7 @@ namespace SimpleDataGrid
 
         protected override FrameworkElement GenerateElement(DataGridCell cell, object dataItem)
         {
-            var txt = new TextBlock { FontSize = FontSize };
+            var txt = new TextBlock { };
             txt.SetBinding(TextBlock.TextProperty, Binding);
 
             return txt;

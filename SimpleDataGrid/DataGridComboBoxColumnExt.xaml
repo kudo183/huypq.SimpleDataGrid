@@ -30,7 +30,7 @@
                                         IsEnabled="{Binding Path=IsUsed}"/>
                                     <Button x:Name="btnAdd" Grid.Column="3" Width="15" HorizontalContentAlignment="Center">
                                         <Button.Content>
-                                            <TextBlock Text="+" FontSize="12" FontWeight="Bold" Padding="0" Margin="0"/>
+                                            <TextBlock Text="+" FontWeight="Bold" Padding="0" Margin="0"/>
                                         </Button.Content>
                                     </Button>
                                 </Grid>
@@ -59,7 +59,7 @@
                                               IsEnabled="{Binding Path=IsUsed}"/>
                                     <Button x:Name="btnAdd" Grid.Column="3" Width="15" HorizontalContentAlignment="Center">
                                         <Button.Content>
-                                            <TextBlock Text="+" FontSize="12" FontWeight="Bold" Padding="0" Margin="0"/>
+                                            <TextBlock Text="+" FontWeight="Bold" Padding="0" Margin="0"/>
                                         </Button.Content>
                                     </Button>
                                 </Grid>
@@ -70,17 +70,11 @@
             </Style.Triggers>
         </Style>
     </DataGridComboBoxColumn.HeaderStyle>
-    <DataGridComboBoxColumn.ElementStyle>
-        <Style TargetType="ComboBox">
-            <Setter Property="FontSize" Value="16"/>
-        </Style>
-    </DataGridComboBoxColumn.ElementStyle>
     <DataGridComboBoxColumn.EditingElementStyle>
         <Style TargetType="ComboBox">
             <Setter Property="IsEditable" Value="True"/>
             <Setter Property="IsTextSearchEnabled" Value="True"/>
             <Setter Property="StaysOpenOnEdit" Value="True"/>
-            <Setter Property="FontSize" Value="16"/>
             <EventSetter Event="UIElement.PreviewKeyDown" Handler="comboBox_KeyDown"/>
         </Style>
     </DataGridComboBoxColumn.EditingElementStyle>

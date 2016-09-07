@@ -8,39 +8,32 @@
         <CheckBox IsChecked="{Binding IsEnablePaging}" Width="20" VerticalAlignment="Center"/>
         <TextBlock Text="Trang"
                    VerticalAlignment="Center"
-                   FontSize="12"
                    Margin="5,0,5,0"/>
         <TextBox Width="40"
                  VerticalContentAlignment="Center"
-                 FontSize="12"
                  Text="{Binding CurrentPageIndex}"
                  IsEnabled="{Binding IsEnablePaging}"/>
         <TextBlock Text=" tren "
                    VerticalAlignment="Center"
                    FontSize="12"/>
         <TextBlock VerticalAlignment="Center"
-                   FontSize="12"
                    Margin="0,0,5,0"
                    Text="{Binding PageCount}"/>
         <Button Content="&lt;"
                 Width="35"
                 VerticalAlignment="Center"
-                FontSize="12"
                 IsEnabled="{Binding IsEnablePaging}"
                 Command="{Binding PrevCommand}"/>
         <Button x:Name="NextPageButton"
                 Content="&gt;"
                 Width="35"
                 VerticalAlignment="Center"
-                FontSize="12"
                 IsEnabled="{Binding IsEnablePaging}"
                 Command="{Binding NextCommand}"/>
         <TextBlock VerticalAlignment="Center"
                    Margin="5,0,5,0"
-                   FontSize="12"
                    Text="{Binding ItemCount}"/>
         <TextBlock Text="Dong"
-                   VerticalAlignment="Center"
-                   FontSize="12"/>
+                   VerticalAlignment="Center"/>
     </StackPanel>
 </UserControl>
