@@ -39,13 +39,14 @@ namespace SimpleDataGrid
             var builder = new StringBuilder();
             foreach (var row in data)
             {
-                foreach (var cell in row)
+                var lastCellIndex = row.Count - 1;
+                for (var i = 0; i < lastCellIndex; i++)
                 {
-                    builder.Append(cell);
+                    builder.Append(row[i]);
                     builder.Append("\t");
                 }
 
-                builder.AppendLine("");
+                builder.AppendLine(row[lastCellIndex].ToString());
             }
 
             Clipboard.SetText(builder.ToString());
@@ -209,7 +210,6 @@ namespace SimpleDataGrid
 
             foreach (var column in Columns)
             {
-
                 if (column.Visibility == Visibility.Visible)
                 {
                     if (column is DataGridBoundColumn)
@@ -225,7 +225,10 @@ namespace SimpleDataGrid
                     else if (column is DataGridComboBoxColumn)
                     {
                         var temp = column as DataGridComboBoxColumn;
-                        bindingsPath.Add((temp.TextBinding as System.Windows.Data.Binding).Path.Path);
+                        if (temp.TextBinding != null)
+                            bindingsPath.Add((temp.TextBinding as System.Windows.Data.Binding).Path.Path);
+                        else
+                            bindingsPath.Add((temp.SelectedValueBinding as System.Windows.Data.Binding).Path.Path);
 
                         if (temp.Header is HeaderFilterBaseModel)
                             header.Add((temp.Header as HeaderFilterBaseModel).Name);
