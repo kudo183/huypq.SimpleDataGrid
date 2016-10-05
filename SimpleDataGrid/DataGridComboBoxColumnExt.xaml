@@ -7,30 +7,34 @@
     <DataGridComboBoxColumn.HeaderStyle>
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <EventSetter Event="Click" Handler="headerAddButton_Click"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding FilterType}" Value="TextFilter">
                     <Setter Property="ContentTemplate">
                         <Setter.Value>
                             <DataTemplate>
                                 <Grid HorizontalAlignment="Stretch">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="20"/>
+                                    </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Text="{Binding Name}" VerticalAlignment="Center"/>
-                                    <CheckBox Grid.Column="1" VerticalAlignment="Center" Margin="5" IsChecked="{Binding Path=IsUsed}"/>
+                                    <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding Name}" Margin="2,0,2,0" FontWeight="Bold"/>
+                                        <CheckBox Margin="2,0,2,0" IsChecked="{Binding Path=IsUsed}"/>
+                                    </StackPanel>
                                     <SimpleDataGrid:TextBoxExt
-                                        Grid.Column="2"
-                                        Text="{Binding FilterValue, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
-                                        IsUseEnterKeyPressBinding="True"
-                                        Margin="3,0,3,0"
-                                        IsEnabled="{Binding Path=IsUsed}"/>
-                                    <Button x:Name="btnAdd" Grid.Column="3" Width="15" HorizontalContentAlignment="Center">
+                                            Grid.Row="1"
+                                            HorizontalContentAlignment="Stretch"
+                                            Text="{Binding FilterValue, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
+                                            IsUseEnterKeyPressBinding="True"
+                                            Margin="1,0,1,0"
+                                            IsEnabled="{Binding Path=IsUsed}"/>
+                                    <Button Grid.Row="1" Grid.Column="1" Width="20" Padding="0,-1,0,0" Command="{Binding AddCommand}">
                                         <Button.Content>
-                                            <TextBlock Text="+" FontWeight="Bold" Padding="0" Margin="0"/>
+                                            <TextBlock Text="➕"/>
                                         </Button.Content>
                                     </Button>
                                 </Grid>
@@ -43,23 +47,28 @@
                         <Setter.Value>
                             <DataTemplate>
                                 <Grid HorizontalAlignment="Stretch">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="20"/>
+                                    </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Text="{Binding Name}" VerticalAlignment="Center"/>
-                                    <CheckBox Grid.Column="1" VerticalAlignment="Center" Margin="5" IsChecked="{Binding Path=IsUsed}"/>
-                                    <ComboBox Grid.Column="2" Margin="3,0,3,0"
+                                    <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding Name}" Margin="2,0,2,0" FontWeight="Bold"/>
+                                        <CheckBox Margin="2,0,2,0" IsChecked="{Binding Path=IsUsed}"/>
+                                    </StackPanel>
+                                    <ComboBox Grid.Row="1"
+                                              Margin="1,0,1,0"
                                               ItemsSource="{Binding ItemSource}"
                                               SelectedValue="{Binding FilterValue}"
                                               DisplayMemberPath="Value"
                                               SelectedValuePath="Key"
                                               IsEnabled="{Binding Path=IsUsed}"/>
-                                    <Button x:Name="btnAdd" Grid.Column="3" Width="15" HorizontalContentAlignment="Center">
+                                    <Button Grid.Row="1" Grid.Column="1" Width="20" Padding="0,-1,0,0" Command="{Binding AddCommand}">
                                         <Button.Content>
-                                            <TextBlock Text="+" FontWeight="Bold" Padding="0" Margin="0"/>
+                                            <TextBlock Text="➕"/>
                                         </Button.Content>
                                     </Button>
                                 </Grid>

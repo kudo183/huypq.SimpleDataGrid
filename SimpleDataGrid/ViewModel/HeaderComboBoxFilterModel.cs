@@ -1,10 +1,16 @@
-﻿namespace SimpleDataGrid.ViewModel
+﻿using System;
+
+namespace SimpleDataGrid.ViewModel
 {
     public class HeaderComboBoxFilterModel : HeaderFilterBaseModel
     {
-        public HeaderComboBoxFilterModel(string name)
-            : base(name, "ComboBoxFilter")
+        public const string ComboBoxFilter = "ComboBoxFilter";
+        public const string TextFilter = "TextFilter";
+
+        public HeaderComboBoxFilterModel(string name, string filterType, string propertyName, Type propertyType)
+            : base(name, filterType, propertyName, propertyType)
         {
+            
         }
 
         private object _itemSource;
@@ -22,5 +28,7 @@
                 OnPropertyChanged("ItemSource");
             }
         }
+
+        public SimpleCommand AddCommand { get; set; }
     }
 }

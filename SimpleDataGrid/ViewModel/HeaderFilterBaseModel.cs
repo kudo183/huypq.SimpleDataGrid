@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace SimpleDataGrid.ViewModel
 {
@@ -6,10 +7,18 @@ namespace SimpleDataGrid.ViewModel
     {
         public string FilterType { get; set; }
 
-        protected HeaderFilterBaseModel(string name, string filterType)
+        public string PropertyName { get; set; }
+        public Type PropertyType { get; set; }
+
+        public Action ActionIsUsedChanged { get; set; }
+        public Action ActionFilterValueChanged { get; set; }
+
+        protected HeaderFilterBaseModel(string name, string filterType, string propertyName, Type propertyType)
         {
             _name = name;
             FilterType = filterType;
+            PropertyName = propertyName;
+            PropertyType = propertyType;
         }
 
         private string _name;
@@ -27,8 +36,8 @@ namespace SimpleDataGrid.ViewModel
                 OnPropertyChanged("Name");
             }
         }
-        
-        protected bool _isUsed = true;
+
+        protected bool _isUsed = false;
         public bool IsUsed
         {
             get { return _isUsed; }
@@ -41,6 +50,11 @@ namespace SimpleDataGrid.ViewModel
 
                 _isUsed = value;
                 OnPropertyChanged("IsUsed");
+
+                if (ActionIsUsedChanged != null)
+                {
+                    ActionIsUsedChanged();
+                }
             }
         }
 
@@ -57,9 +71,14 @@ namespace SimpleDataGrid.ViewModel
 
                 _filterValue = value;
                 OnPropertyChanged("FilterValue");
+
+                if (ActionFilterValueChanged != null)
+                {
+                    ActionFilterValueChanged();
+                }
             }
         }
-        
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)

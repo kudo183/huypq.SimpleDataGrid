@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace SimpleDataGrid.ViewModel
 {
@@ -8,6 +9,9 @@ namespace SimpleDataGrid.ViewModel
         private int _pageCount;
         private int _itemCount;
         private bool _isEnablePaging;
+
+        public Action ActionCurrentPageIndexChanged { get; set; }
+        public Action ActionIsEnablePagingChanged { get; set; }
 
         public PagerViewModel()
         {
@@ -34,6 +38,10 @@ namespace SimpleDataGrid.ViewModel
 
                     _currentPageIndex = value;
                     OnPropertyChanged("CurrentPageIndex");
+                    if (ActionCurrentPageIndexChanged != null)
+                    {
+                        ActionCurrentPageIndexChanged();
+                    }
 
                     if (oldIndex == 1 || newIndex == 1)
                     {
@@ -82,6 +90,10 @@ namespace SimpleDataGrid.ViewModel
                 {
                     _isEnablePaging = value;
                     OnPropertyChanged("IsEnablePaging");
+                    if (ActionIsEnablePagingChanged != null)
+                    {
+                        ActionIsEnablePagingChanged();
+                    }
                 }
             }
         }

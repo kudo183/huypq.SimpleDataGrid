@@ -24,6 +24,11 @@ namespace SimpleDataGrid
 
     public class TestViewModel : EditableGridViewModel<TestData>
     {
+        public ObservableCollection<TestData> Entities { get; set; }
+
+        public List<HeaderFilterBaseModel> HeaderFilters { get; set; }
+
+        public PagerViewModel PagerViewModel { get; set; }
     }
 
     public static class DesignTimeTestData
@@ -36,7 +41,7 @@ namespace SimpleDataGrid
                 if (_testTextHeader != null)
                     return _testTextHeader;
 
-                _testTextHeader = new HeaderTextFilterModel("Name");
+                _testTextHeader = new HeaderTextFilterModel("Name", "PropertyName", typeof(string));
                 return _testTextHeader;
             }
         }
@@ -49,7 +54,7 @@ namespace SimpleDataGrid
                 if (_testDateHeader != null)
                     return _testDateHeader;
 
-                _testDateHeader = new HeaderDateFilterModel("Date");
+                _testDateHeader = new HeaderDateFilterModel("Date", "PropertyName", typeof(DateTime));
                 return _testDateHeader;
             }
         }
@@ -62,7 +67,7 @@ namespace SimpleDataGrid
                 if (_testComboBoxHeader != null)
                     return _testComboBoxHeader;
 
-                _testComboBoxHeader = new HeaderComboBoxFilterModel("Reference");
+                _testComboBoxHeader = new HeaderComboBoxFilterModel("Reference", HeaderComboBoxFilterModel.TextFilter, "PropertyName", typeof(string));
                 return _testComboBoxHeader;
             }
         }
@@ -75,7 +80,7 @@ namespace SimpleDataGrid
                 if (_testCheckHeader != null)
                     return _testCheckHeader;
 
-                _testCheckHeader = new HeaderCheckFilterModel("Check");
+                _testCheckHeader = new HeaderCheckFilterModel("Check", "PropertyName", typeof(bool));
                 return _testCheckHeader;
             }
         }
