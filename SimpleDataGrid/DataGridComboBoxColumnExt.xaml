@@ -59,9 +59,9 @@
                                         <TextBlock Text="{Binding Name}" Margin="2,0,2,0" FontWeight="Bold"/>
                                         <CheckBox Margin="2,0,2,0" IsChecked="{Binding Path=IsUsed}"/>
                                     </StackPanel>
-                                    <ComboBox Grid.Row="1"
+                                    <SimpleDataGrid:ComboBoxEx Grid.Row="1"
                                               Margin="1,0,1,0"
-                                              ItemsSource="{Binding ItemSource}"
+                                              ItemsSourceEx="{Binding ItemSource}"
                                               SelectedValue="{Binding FilterValue}"
                                               DisplayMemberPath="Value"
                                               SelectedValuePath="Key"

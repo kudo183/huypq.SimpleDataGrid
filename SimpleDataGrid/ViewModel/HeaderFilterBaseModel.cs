@@ -27,7 +27,7 @@ namespace SimpleDataGrid.ViewModel
             get { return _name; }
             set
             {
-                if (_name == value)
+                if (IsSkipSet(_name, value) == true)
                 {
                     return;
                 }
@@ -43,18 +43,14 @@ namespace SimpleDataGrid.ViewModel
             get { return _isUsed; }
             set
             {
-                if (_isUsed == value)
+                if (IsSkipSet(_isUsed, value) == true)
                 {
                     return;
                 }
 
                 _isUsed = value;
                 OnPropertyChanged("IsUsed");
-
-                if (ActionIsUsedChanged != null)
-                {
-                    ActionIsUsedChanged();
-                }
+                PropertyChangedAction("IsUsed");
             }
         }
 
@@ -64,27 +60,41 @@ namespace SimpleDataGrid.ViewModel
             get { return _filterValue; }
             set
             {
-                if (_filterValue == value)
+                if (IsSkipSet(_filterValue, value) == true)
                 {
                     return;
                 }
 
                 _filterValue = value;
                 OnPropertyChanged("FilterValue");
-
-                if (ActionFilterValueChanged != null)
-                {
-                    ActionFilterValueChanged();
-                }
+                PropertyChangedAction("FilterValue");
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string propertyName)
+        public virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public virtual void PropertyChangedAction(string propertyName)
+        {
+            if (propertyName == "IsUsed" && ActionIsUsedChanged != null)
+            {
+                ActionIsUsedChanged();
+            }
+
+            if (propertyName == "FilterValue" && ActionFilterValueChanged != null)
+            {
+                ActionFilterValueChanged();
+            }
+        }
+
+        public virtual bool IsSkipSet(object oldValue, object newValue)
+        {
+            return object.Equals(oldValue, newValue);
         }
     }
 }

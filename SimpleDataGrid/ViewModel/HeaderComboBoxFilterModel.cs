@@ -10,7 +10,7 @@ namespace SimpleDataGrid.ViewModel
         public HeaderComboBoxFilterModel(string name, string filterType, string propertyName, Type propertyType)
             : base(name, filterType, propertyName, propertyType)
         {
-            
+
         }
 
         private object _itemSource;
@@ -19,7 +19,7 @@ namespace SimpleDataGrid.ViewModel
             get { return _itemSource; }
             set
             {
-                if (_itemSource == value)
+                if (IsSkipSet(_itemSource, value) == true)
                 {
                     return;
                 }
@@ -27,6 +27,17 @@ namespace SimpleDataGrid.ViewModel
                 _itemSource = value;
                 OnPropertyChanged("ItemSource");
             }
+        }
+        
+        public override bool IsSkipSet(object oldValue, object newValue)
+        {
+            var source = _itemSource as INotifyCollectionChangedEx;
+            if (source != null && source.IsResetting)
+            {
+                return true;
+            }
+
+            return base.IsSkipSet(oldValue, newValue);
         }
 
         public SimpleCommand AddCommand { get; set; }
