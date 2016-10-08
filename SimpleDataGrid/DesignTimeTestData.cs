@@ -67,7 +67,7 @@ namespace SimpleDataGrid
                 if (_testComboBoxHeader != null)
                     return _testComboBoxHeader;
 
-                _testComboBoxHeader = new HeaderComboBoxFilterModel("Reference", HeaderComboBoxFilterModel.TextFilter, "PropertyName", typeof(string));
+                _testComboBoxHeader = new HeaderComboBoxFilterModel("Reference", HeaderComboBoxFilterModel.TextFilter, "PropertyName", typeof(string), "Ma", "Value");
                 return _testComboBoxHeader;
             }
         }

@@ -7,10 +7,50 @@ namespace SimpleDataGrid.ViewModel
         public const string ComboBoxFilter = "ComboBoxFilter";
         public const string TextFilter = "TextFilter";
 
-        public HeaderComboBoxFilterModel(string name, string filterType, string propertyName, Type propertyType)
+        public HeaderComboBoxFilterModel(string name,
+            string filterType,
+            string propertyName,
+            Type propertyType,
+            string displayMemberPath,
+            string selectedValuePath)
             : base(name, filterType, propertyName, propertyType)
         {
+            _displayMemberPath = displayMemberPath;
+            _selectedValuePath = selectedValuePath;
+        }
 
+        private string _displayMemberPath;
+
+        public string DisplayMemberPath
+        {
+            get { return _displayMemberPath; }
+            set
+            {
+                if (IsSkipSet(_displayMemberPath, value) == true)
+                {
+                    return;
+                }
+
+                _displayMemberPath = value;
+                OnPropertyChanged("DisplayMemberPath");
+            }
+        }
+
+        private string _selectedValuePath;
+
+        public string SelectedValuePath
+        {
+            get { return _selectedValuePath; }
+            set
+            {
+                if (IsSkipSet(_selectedValuePath, value) == true)
+                {
+                    return;
+                }
+
+                _selectedValuePath = value;
+                OnPropertyChanged("SelectedValuePath");
+            }
         }
 
         private object _itemSource;
@@ -28,7 +68,7 @@ namespace SimpleDataGrid.ViewModel
                 OnPropertyChanged("ItemSource");
             }
         }
-        
+
         public override bool IsSkipSet(object oldValue, object newValue)
         {
             var source = _itemSource as INotifyCollectionChangedEx;
