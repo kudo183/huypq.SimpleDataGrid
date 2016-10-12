@@ -18,6 +18,13 @@ namespace SimpleDataGrid
             _execute = execute;
         }
 
+        public SimpleCommand(string commandName, Action execute)
+        {
+            _commandName = commandName;
+            _canExecute = () => true;
+            _execute = execute;
+        }
+
         #region Implementation of ICommand
 
         public bool CanExecute(object parameter)
