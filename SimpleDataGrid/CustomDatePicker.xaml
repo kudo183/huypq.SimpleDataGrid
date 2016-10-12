@@ -6,12 +6,12 @@
              mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="15"/>
         </Grid.ColumnDefinitions>
-        <DatePicker Grid.Column="0" x:Name="dp" x:FieldModifier="public"  Width="95"/>
-        <Button Grid.Column="1" Content="&lt;" x:Name="btnPrev" Click="btnPrev_Click"/>
-        <Button Grid.Column="2" Content="&gt;" x:Name="btnNext" Click="btnNext_Click"/>
+        <DatePicker Grid.Column="0" x:Name="dp" x:FieldModifier="public"/>
+        <Button Grid.Column="1" Content="&lt;" Padding="0,-2,0,0" x:Name="btnPrev" Click="btnPrev_Click"/>
+        <Button Grid.Column="2" Content="&gt;" Padding="0,-2,0,0" x:Name="btnNext" Click="btnNext_Click"/>
     </Grid>
 </UserControl>

@@ -11,14 +11,15 @@
                 <Setter.Value>
                     <DataTemplate>
                         <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding Name}" VerticalAlignment="Center"/>
-                            <CheckBox Grid.Column="1" VerticalAlignment="Center" Margin="5" IsChecked="{Binding Path=IsUsed}"/>
-                            <SimpleDataGrid:CustomDatePicker Grid.Column="2" Height="25" Width="130"
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="25"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding Name}" Margin="2,0,2,0" FontWeight="Bold"/>
+                                <CheckBox Margin="2,0,2,0" VerticalAlignment="Center" IsChecked="{Binding Path=IsUsed}"/>
+                            </StackPanel>
+                            <SimpleDataGrid:CustomDatePicker Grid.Row="1"
                                         SelectedDateBinding="{Binding Path=FilterValue}"
                                         IsEnabledBinding="{Binding Path=IsUsed}"/>
                         </Grid>

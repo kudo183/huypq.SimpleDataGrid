@@ -146,7 +146,7 @@ namespace SimpleDataGrid
             var count = System.Windows.Media.VisualTreeHelper.GetChildrenCount(e.EditingElement);
 
             var editingElementType = e.EditingElement.GetType();
-            if (editingElementType == typeof(ComboBox))
+            if (editingElementType.IsSubclassOf(typeof(ComboBox)) == true)
             {
                 ActiveComboBox(e.EditingElement as ComboBox);
                 return;
@@ -166,7 +166,7 @@ namespace SimpleDataGrid
                 {
                     ActiveDatePicker(element as DatePicker);
                 }
-                else if (type == typeof(ComboBox))
+                else if (type.IsSubclassOf(typeof(ComboBox)) == true)
                 {
                     ActiveComboBox(element as ComboBox);
                 }

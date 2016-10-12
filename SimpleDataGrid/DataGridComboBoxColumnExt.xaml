@@ -23,7 +23,7 @@
                                     </Grid.ColumnDefinitions>
                                     <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                                         <TextBlock Text="{Binding Name}" Margin="2,0,2,0" FontWeight="Bold"/>
-                                        <CheckBox Margin="2,0,2,0" IsChecked="{Binding Path=IsUsed}"/>
+                                        <CheckBox Margin="2,0,2,0" VerticalAlignment="Center" IsChecked="{Binding Path=IsUsed}"/>
                                     </StackPanel>
                                     <SimpleDataGrid:TextBoxExt
                                             Grid.Row="1"
@@ -49,7 +49,7 @@
                                 <Grid HorizontalAlignment="Stretch">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="20"/>
-                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="25"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -57,7 +57,7 @@
                                     </Grid.ColumnDefinitions>
                                     <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                                         <TextBlock Text="{Binding Name}" Margin="2,0,2,0" FontWeight="Bold"/>
-                                        <CheckBox Margin="2,0,2,0" IsChecked="{Binding Path=IsUsed}"/>
+                                        <CheckBox Margin="2,0,2,0" VerticalAlignment="Center" IsChecked="{Binding Path=IsUsed}"/>
                                     </StackPanel>
                                     <SimpleDataGrid:ComboBoxEx Grid.Row="1"
                                               Margin="1,0,1,0"
