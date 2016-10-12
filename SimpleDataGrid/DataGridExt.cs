@@ -118,10 +118,6 @@ namespace SimpleDataGrid
                 if (SelectedIndex < Items.Count - 1 - itemPlaceHolderCount)
                 {
                     SelectedIndex = SelectedIndex + 1;
-
-                    CurrentCell = new DataGridCellInfo(Items[SelectedIndex], Columns[firstEditableColumnIndex]);
-
-                    BeginEdit();
                 }
                 else //need add new item
                 {
@@ -130,11 +126,11 @@ namespace SimpleDataGrid
                     item.AddNewItem(Activator.CreateInstance(type.GetGenericArguments()[0]));
 
                     SelectedIndex = Items.Count - 1 - itemPlaceHolderCount;
-
-                    CurrentCell = new DataGridCellInfo(Items[SelectedIndex], Columns[firstEditableColumnIndex]);
-
-                    BeginEdit();
                 }
+
+                CurrentCell = new DataGridCellInfo(Items[SelectedIndex], Columns[firstEditableColumnIndex]);
+
+                BeginEdit();
             }
 
             e.Handled = true;
@@ -187,19 +183,7 @@ namespace SimpleDataGrid
             Keyboard.Focus(txt);
             txt.Select(0, 2);
         }
-
-        public event EventHandler HeaderAddButtonClick;
-
-        protected void headerAddButton_Click(object sender, EventArgs e)
-        {
-            if (HeaderAddButtonClick == null)
-            {
-                return;
-            }
-
-            HeaderAddButtonClick(sender, e);
-        }
-
+        
         public List<List<object>> ExportData()
         {
             var result = new List<List<object>>();
