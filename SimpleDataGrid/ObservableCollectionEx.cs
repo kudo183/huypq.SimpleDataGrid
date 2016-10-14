@@ -14,6 +14,10 @@ namespace SimpleDataGrid
 
     public class ObservableCollectionEx<T> : ObservableCollection<T>, INotifyCollectionChangedEx
     {
+        public ObservableCollectionEx() : base() { }
+        public ObservableCollectionEx(List<T> list) : base(list) { }
+        public ObservableCollectionEx(IEnumerable<T> collection) : base(collection) { }
+
         public bool IsResetting { get; set; }
 
         public event ResetCompletedEventHandler ResetCompleted;

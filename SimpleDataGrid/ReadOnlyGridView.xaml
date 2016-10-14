@@ -13,6 +13,8 @@
         </Grid.RowDefinitions>
         <SimpleDataGrid:DataGridExt
             x:Name="dataGrid"
+            x:FieldModifier="public"
+            SelectedIndex="{Binding SelectedIndex}"
             Grid.Row="0"
             IsReadOnly="True"
             AutoGenerateColumns="False"

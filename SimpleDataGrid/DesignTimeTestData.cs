@@ -24,11 +24,13 @@ namespace SimpleDataGrid
 
     public class TestViewModel : EditableGridViewModel<TestData>
     {
-        public ObservableCollection<TestData> Entities { get; set; }
+        public ObservableCollectionEx<TestData> Entities { get; set; }
 
         public List<HeaderFilterBaseModel> HeaderFilters { get; set; }
 
         public PagerViewModel PagerViewModel { get; set; }
+
+        public int SelectedIndex { get; set; }
     }
 
     public static class DesignTimeTestData
@@ -94,7 +96,7 @@ namespace SimpleDataGrid
                     return _viewModel;
 
                 _viewModel = new TestViewModel();
-                _viewModel.Entities = new ObservableCollection<TestData>(Entities);
+                _viewModel.Entities = new ObservableCollectionEx<TestData>(Entities);
                 _viewModel.PagerViewModel = new PagerViewModel()
                 {
                     CurrentPageIndex = 1,

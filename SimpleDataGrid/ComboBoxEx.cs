@@ -61,14 +61,8 @@ namespace SimpleDataGrid
                 return;
             }
 
-            var exp = GetBindingExpression(ComboBox.SelectedValueProperty);
-
             var o = _oldSelectedItem.GetType().GetProperty(SelectedValuePath);
-            var p = exp.ResolvedSource.GetType().GetProperty(exp.ResolvedSourcePropertyName);
-
-            p.SetValue(exp.ResolvedSource, o.GetValue(_oldSelectedItem));
-
-            exp.UpdateTarget();
+            SelectedValue = o.GetValue(_oldSelectedItem);
         }
     }
 }

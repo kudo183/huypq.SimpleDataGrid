@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace SimpleDataGrid.ViewModel
 {
     public interface EditableGridViewModel<T>
     {
-        ObservableCollection<T> Entities { get; set; }
+        ObservableCollectionEx<T> Entities { get; set; }
+        int SelectedIndex { get; set; }
         PagerViewModel PagerViewModel { get; set; }
         List<HeaderFilterBaseModel> HeaderFilters { get; set; }
     }
