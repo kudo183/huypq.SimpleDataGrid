@@ -81,6 +81,11 @@ namespace SimpleDataGrid.ViewModel
 
         public virtual void PropertyChangedAction(string propertyName)
         {
+            if (_disableAction == true)
+            {
+                return;
+            }
+
             if (propertyName == nameof(IsUsed) && ActionIsUsedChanged != null)
             {
                 ActionIsUsedChanged();
@@ -95,6 +100,17 @@ namespace SimpleDataGrid.ViewModel
         public virtual bool IsSkipSet(object oldValue, object newValue)
         {
             return object.Equals(oldValue, newValue);
+        }
+
+        private bool _disableAction = false;
+        public virtual void DisableChangedAction(Action<HeaderFilterBaseModel> setAction)
+        {
+            _disableAction = true;
+            if (setAction != null)
+            {
+                setAction(this);
+            }
+            _disableAction = false;
         }
     }
 }

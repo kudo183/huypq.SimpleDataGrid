@@ -7,7 +7,8 @@ namespace SimpleDataGrid.ViewModel
         public HeaderDateFilterModel(string name, string propertyName, Type propertyType)
             : base(name, "DateFilter", propertyName, propertyType)
         {
-            FilterValue = System.DateTime.Now;
+            FilterValue = System.DateTime.Now.Date;
+            IsUsed = true;
         }
     }
 }
