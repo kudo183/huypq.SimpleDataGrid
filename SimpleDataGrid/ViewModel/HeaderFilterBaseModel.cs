@@ -33,7 +33,7 @@ namespace SimpleDataGrid.ViewModel
                 }
 
                 _name = value;
-                OnPropertyChanged("Name");
+                OnPropertyChanged(nameof(Name));
             }
         }
 
@@ -49,8 +49,8 @@ namespace SimpleDataGrid.ViewModel
                 }
 
                 _isUsed = value;
-                OnPropertyChanged("IsUsed");
-                PropertyChangedAction("IsUsed");
+                OnPropertyChanged(nameof(IsUsed));
+                PropertyChangedAction(nameof(IsUsed));
             }
         }
 
@@ -66,8 +66,8 @@ namespace SimpleDataGrid.ViewModel
                 }
 
                 _filterValue = value;
-                OnPropertyChanged("FilterValue");
-                PropertyChangedAction("FilterValue");
+                OnPropertyChanged(nameof(FilterValue));
+                PropertyChangedAction(nameof(FilterValue));
             }
         }
 
@@ -81,12 +81,12 @@ namespace SimpleDataGrid.ViewModel
 
         public virtual void PropertyChangedAction(string propertyName)
         {
-            if (propertyName == "IsUsed" && ActionIsUsedChanged != null)
+            if (propertyName == nameof(IsUsed) && ActionIsUsedChanged != null)
             {
                 ActionIsUsedChanged();
             }
 
-            if (propertyName == "FilterValue" && ActionFilterValueChanged != null)
+            if (propertyName == nameof(FilterValue) && ActionFilterValueChanged != null)
             {
                 ActionFilterValueChanged();
             }

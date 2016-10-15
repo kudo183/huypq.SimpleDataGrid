@@ -32,7 +32,7 @@ namespace SimpleDataGrid.ViewModel
                 }
 
                 _displayMemberPath = value;
-                OnPropertyChanged("DisplayMemberPath");
+                OnPropertyChanged(nameof(DisplayMemberPath));
             }
         }
 
@@ -49,7 +49,7 @@ namespace SimpleDataGrid.ViewModel
                 }
 
                 _selectedValuePath = value;
-                OnPropertyChanged("SelectedValuePath");
+                OnPropertyChanged(nameof(SelectedValuePath));
             }
         }
 
@@ -65,7 +65,7 @@ namespace SimpleDataGrid.ViewModel
                 }
 
                 _itemSource = value;
-                OnPropertyChanged("ItemSource");
+                OnPropertyChanged(nameof(ItemSource));
             }
         }
 
