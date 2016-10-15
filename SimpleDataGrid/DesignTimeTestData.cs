@@ -28,7 +28,11 @@ namespace SimpleDataGrid
 
         public List<HeaderFilterBaseModel> HeaderFilters { get; set; }
 
+        public SimpleCommand LoadCommand { get; set; }
+
         public PagerViewModel PagerViewModel { get; set; }
+
+        public SimpleCommand SaveCommand { get; set; }
 
         public int SelectedIndex { get; set; }
     }
