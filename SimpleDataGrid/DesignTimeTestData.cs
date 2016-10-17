@@ -22,7 +22,7 @@ namespace SimpleDataGrid
         public List<TestReferenceData> TestReferenceDataList { get; set; }
     }
 
-    public class TestViewModel : EditableGridViewModel<TestData>
+    public class TestViewModel : IEditableGridViewModel<TestData>
     {
         public ObservableCollectionEx<TestData> Entities { get; set; }
 

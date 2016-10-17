@@ -12,8 +12,6 @@ namespace SimpleDataGrid
         public List<DataGridColumn> Columns { get; set; }
         public List<UIElement> CustomMenuItems { get; set; }
 
-        public object SelectedItem { get { return dataGrid.SelectedItem; } }
-
         private bool _isFirstLoaded = true;
 
         public EditableGridView()
@@ -23,15 +21,9 @@ namespace SimpleDataGrid
             InitializeComponent();
 
             Loaded += EditableGridView_Loaded;
-
         }
 
         void EditableGridView_Loaded(object sender, RoutedEventArgs e)
-        {
-            InitializeWhenFirstLoaded();
-        }
-
-        void InitializeWhenFirstLoaded()
         {
             if (_isFirstLoaded == false)
                 return;
