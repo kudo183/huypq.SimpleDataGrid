@@ -24,8 +24,8 @@
         <StackPanel x:Name="sp" Grid.Row="1" Orientation="Horizontal">
             <SimpleDataGrid:Pager DataContext="{Binding PagerViewModel}"/>
             <StackPanel Orientation="Horizontal" Margin="30,0,0,0">
-                <Button Content="Lưu" VerticalAlignment="Top" Width="75" Margin="5" Command="{Binding SaveCommand}"/>
-                <Button Content="Hủy" VerticalAlignment="Top" Width="75" Margin="5" Command="{Binding LoadCommand}"/>
+                <Button x:Name="btnSave" Content="Lưu" VerticalAlignment="Top" Width="75" Margin="5" Command="{Binding SaveCommand}"/>
+                <Button x:Name="btnLoad" Content="Hủy" VerticalAlignment="Top" Width="75" Margin="5" Command="{Binding LoadCommand}"/>
             </StackPanel>
         </StackPanel>
     </Grid>

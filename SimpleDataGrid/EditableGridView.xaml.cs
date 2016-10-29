@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,35 +9,30 @@ namespace SimpleDataGrid
     /// </summary>
     public partial class EditableGridView : UserControl
     {
-        public List<DataGridColumn> Columns { get; set; }
-        public List<UIElement> CustomMenuItems { get; set; }
+        public Visibility SaveButtonVisibility
+        {
+            get { return btnSave.Visibility; }
+            set { btnSave.Visibility = value; }
+        }
 
-        private bool _isFirstLoaded = true;
+        public Visibility LoadButtonVisibility
+        {
+            get { return btnLoad.Visibility; }
+            set { btnLoad.Visibility = value; }
+        }
+
+        public bool IsReadOnly
+        {
+            get { return dataGrid.IsReadOnly; }
+            set { dataGrid.IsReadOnly = value; }
+        }
+
+        public ObservableCollection<DataGridColumn> Columns { get { return dataGrid.Columns; } }
+        public UIElementCollection CustomMenuItems { get { return sp.Children; } }
 
         public EditableGridView()
         {
-            Columns = new List<DataGridColumn>();
-            CustomMenuItems = new List<UIElement>();
             InitializeComponent();
-
-            Loaded += EditableGridView_Loaded;
-        }
-
-        void EditableGridView_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (_isFirstLoaded == false)
-                return;
-
-            foreach (var dataGridColumn in Columns)
-            {
-                dataGrid.Columns.Add(dataGridColumn);
-            }
-            foreach (var uiElement in CustomMenuItems)
-            {
-                sp.Children.Add(uiElement);
-            }
-
-            _isFirstLoaded = false;
         }
     }
 }
