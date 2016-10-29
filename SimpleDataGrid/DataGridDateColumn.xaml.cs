@@ -35,7 +35,14 @@ namespace SimpleDataGrid
         protected override FrameworkElement GenerateElement(DataGridCell cell, object dataItem)
         {
             var txt = new TextBlock { };
-            txt.SetBinding(TextBlock.TextProperty, Binding);
+
+            var b = (Binding as Binding);
+
+            var binding = new Binding(b.Path.Path);
+            binding.StringFormat = "{0:d}";
+            binding.UpdateSourceTrigger = b.UpdateSourceTrigger;
+
+            txt.SetBinding(TextBlock.TextProperty, binding);
 
             return txt;
         }
