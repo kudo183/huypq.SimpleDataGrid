@@ -14,11 +14,12 @@
         <SimpleDataGrid:DataGridExt
             x:Name="dataGrid"
             x:FieldModifier="public"
-            SelectedIndex="{Binding SelectedIndex}"
+            SelectedValue="{Binding SelectedValue}"
+            SelectedValuePath="{Binding SelectedValuePath}"
             Grid.Row="0"
             AutoGenerateColumns="False"
             EnableRowVirtualization="False"
-            ItemsSource="{Binding Entities}"
+            ItemsSourceEx="{Binding Entities}"
             SelectionMode="Single">
         </SimpleDataGrid:DataGridExt>
         <StackPanel x:Name="sp" Grid.Row="1" Orientation="Horizontal">

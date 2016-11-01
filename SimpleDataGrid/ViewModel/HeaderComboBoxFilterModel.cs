@@ -69,17 +69,6 @@ namespace SimpleDataGrid.ViewModel
             }
         }
 
-        public override bool IsSkipSet(object oldValue, object newValue)
-        {
-            var source = _itemSource as INotifyCollectionChangedEx;
-            if (source != null && source.IsResetting)
-            {
-                return true;
-            }
-
-            return base.IsSkipSet(oldValue, newValue);
-        }
-
         public SimpleCommand AddCommand { get; set; }
     }
 }

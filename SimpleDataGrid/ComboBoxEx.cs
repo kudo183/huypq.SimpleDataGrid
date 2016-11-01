@@ -6,6 +6,13 @@ namespace SimpleDataGrid
 {
     public class ComboBoxEx : ComboBox
     {
+        public ComboBoxEx() : base()
+        {
+            ItemsPanel = new ItemsPanelTemplate();
+            var stackPanelTemplate = new FrameworkElementFactory(typeof(VirtualizingStackPanel));
+            ItemsPanel.VisualTree = stackPanelTemplate;
+        }
+
         public IEnumerable ItemsSourceEx
         {
             get { return (IEnumerable)GetValue(ItemsSourceExProperty); }
@@ -30,40 +37,29 @@ namespace SimpleDataGrid
             var oldValue = e.OldValue as INotifyCollectionChangedEx;
             if (oldValue != null)
             {
-                oldValue.ResetCompleted -= combo.ProcessResetCompleted;
+                oldValue.BeginReset -= combo.NewValue_BeginReset;
+                oldValue.EndReset -= combo.NewValue_EndReset;
             }
 
             var newValue = e.NewValue as INotifyCollectionChangedEx;
             if (newValue != null)
             {
-                newValue.ResetCompleted += combo.ProcessResetCompleted;
+                newValue.BeginReset += combo.NewValue_BeginReset;
+                newValue.EndReset += combo.NewValue_EndReset;
             }
         }
 
         private object _oldSelectedItem;
 
-        protected override void OnSelectionChanged(SelectionChangedEventArgs e)
+        private void NewValue_BeginReset()
         {
-            if (e.RemovedItems.Count > 0)
-            {
-                _oldSelectedItem = e.RemovedItems[0];
-            }
-
-            base.OnSelectionChanged(e);
+            _oldSelectedItem = SelectedValue;
         }
 
-        private void ProcessResetCompleted()
+        private void NewValue_EndReset()
         {
-            var source = ItemsSource as INotifyCollectionChangedEx;
-
-            if (source == null || _oldSelectedItem == null)
-            {
-                return;
-            }
-
-            var o = _oldSelectedItem.GetType().GetProperty(SelectedValuePath);
-            SelectedValue = o.GetValue(_oldSelectedItem);
+            SelectedValue = _oldSelectedItem;
+            Items.Refresh();
         }
     }
 }
-

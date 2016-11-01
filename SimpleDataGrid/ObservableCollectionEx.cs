@@ -8,8 +8,8 @@ namespace SimpleDataGrid
 
     public interface INotifyCollectionChangedEx : INotifyCollectionChanged
     {
-        bool IsResetting { get; set; }
-        event ResetCompletedEventHandler ResetCompleted;
+        event ResetCompletedEventHandler BeginReset;
+        event ResetCompletedEventHandler EndReset;
     }
 
     public class ObservableCollectionEx<T> : ObservableCollection<T>, INotifyCollectionChangedEx
@@ -18,29 +18,30 @@ namespace SimpleDataGrid
         public ObservableCollectionEx(List<T> list) : base(list) { }
         public ObservableCollectionEx(IEnumerable<T> collection) : base(collection) { }
 
-        public bool IsResetting { get; set; }
-
-        public event ResetCompletedEventHandler ResetCompleted;
+        public event ResetCompletedEventHandler BeginReset;
+        public event ResetCompletedEventHandler EndReset;
 
         public void Reset(IEnumerable<T> data)
         {
-            IsResetting = true;
-            Clear();
+            OnBeginReset();
+
+            Items.Clear();
             foreach (var item in data)
             {
-                Add(item);
+                Items.Add(item);
             }
-            IsResetting = false;
-            OnResetCompleted();
+
+            OnEndReset();
         }
 
-        public virtual void OnResetCompleted()
+        public virtual void OnBeginReset()
         {
-            var handler = ResetCompleted;
-            if (handler != null)
-            {
-                handler();
-            }
+            BeginReset?.Invoke();
+        }
+
+        public virtual void OnEndReset()
+        {
+            EndReset?.Invoke();
         }
     }
 }

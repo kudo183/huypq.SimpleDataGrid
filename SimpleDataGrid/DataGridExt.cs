@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using SimpleDataGrid.ViewModel;
+using System.Collections;
 
 namespace SimpleDataGrid
 {
@@ -31,6 +32,56 @@ namespace SimpleDataGrid
             menuItem.Click += menuItem_Click;
             menu.Items.Add(menuItem);
             ContextMenu = menu;
+        }
+
+
+        public IEnumerable ItemsSourceEx
+        {
+            get { return (IEnumerable)GetValue(ItemsSourceExProperty); }
+            set
+            {
+                SetValue(ItemsSourceExProperty, value);
+                ItemsSource = value;
+            }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemsSourceEx.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemsSourceExProperty =
+            DependencyProperty.Register(
+                "ItemsSourceEx", typeof(IEnumerable), typeof(DataGridExt),
+                new PropertyMetadata(null, new PropertyChangedCallback(OnItemsSourceExChanged)));
+
+        private static void OnItemsSourceExChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            d.SetValue(ItemsSourceProperty, e.NewValue);
+            var dg = d as DataGridExt;
+
+            var oldValue = e.OldValue as INotifyCollectionChangedEx;
+            if (oldValue != null)
+            {
+                oldValue.BeginReset -= dg.NewValue_BeginReset;
+                oldValue.EndReset -= dg.NewValue_EndReset;
+            }
+
+            var newValue = e.NewValue as INotifyCollectionChangedEx;
+            if (newValue != null)
+            {
+                newValue.BeginReset += dg.NewValue_BeginReset;
+                newValue.EndReset += dg.NewValue_EndReset;
+            }
+        }
+
+        private object _oldSelectedItem;
+
+        private void NewValue_BeginReset()
+        {
+            _oldSelectedItem = SelectedValue;
+        }
+
+        private void NewValue_EndReset()
+        {
+            SelectedValue = _oldSelectedItem;
+            Items.Refresh();
         }
 
         void menuItem_Click(object sender, RoutedEventArgs e)

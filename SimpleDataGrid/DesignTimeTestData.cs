@@ -33,8 +33,8 @@ namespace SimpleDataGrid
         public PagerViewModel PagerViewModel { get; set; }
 
         public SimpleCommand SaveCommand { get; set; }
-
-        public int SelectedIndex { get; set; }
+        
+        public object SelectedValue { get; set; }
     }
 
     public static class DesignTimeTestData
