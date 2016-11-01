@@ -64,6 +64,8 @@ namespace SimpleDataGrid.ViewModel
                 {
                     _pageCount = value;
                     OnPropertyChanged("PageCount");
+                    PrevCommand.RaiseCanExecuteChanged();
+                    NextCommand.RaiseCanExecuteChanged();
                 }
             }
         }
