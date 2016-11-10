@@ -27,6 +27,8 @@ namespace SimpleDataGrid
             CanUserResizeRows = false;
             HeadersVisibility = DataGridHeadersVisibility.Column;
 
+            KeepSelectionType = KeepSelection.KeepSelectedIndex;
+
             var menu = new ContextMenu();
             var menuItem = new MenuItem { Header = "Copy Data" };
             menuItem.Click += menuItem_Click;
@@ -73,14 +75,67 @@ namespace SimpleDataGrid
 
         private object _oldSelectedItem;
 
+        public enum KeepSelection
+        {
+            NotKeepSelection,
+            KeepSelectedValue,
+            KeepSelectedIndex
+        }
+
+        /// <summary>
+        /// default value is KeepSelectedIndex
+        /// </summary>
+        public KeepSelection KeepSelectionType { get; set; }
+
         private void NewValue_BeginReset()
         {
-            _oldSelectedItem = SelectedValue;
+            switch (KeepSelectionType)
+            {
+                case KeepSelection.NotKeepSelection:
+                    break;
+                case KeepSelection.KeepSelectedValue:
+                    _oldSelectedItem = SelectedValue;
+                    break;
+                case KeepSelection.KeepSelectedIndex:
+                    _oldSelectedItem = SelectedIndex;
+                    break;
+            }
         }
 
         private void NewValue_EndReset()
         {
-            SelectedValue = _oldSelectedItem;
+            switch (KeepSelectionType)
+            {
+                case KeepSelection.NotKeepSelection:
+                    break;
+                case KeepSelection.KeepSelectedValue:
+                    SelectedValue = _oldSelectedItem;
+                    break;
+                case KeepSelection.KeepSelectedIndex:
+
+                    //don't know why but set SelectedIndex not work, set SelectedValue work
+                    //SelectedIndex = (int)_oldSelectedItem;
+
+                    var index = (int)_oldSelectedItem;
+                    if (index == -1)
+                    {
+                        SelectedValue = null;
+                    }
+                    else
+                    {
+                        var i = 0;
+                        foreach (var item in ItemsSourceEx)
+                        {
+                            if (i == index)
+                            {
+                                var p = item.GetType().GetProperty(SelectedValuePath);
+                                SelectedValue = p.GetValue(item);
+                            }
+                            i++;
+                        }
+                    }
+                    break;
+            }
             Items.Refresh();
         }
 
@@ -234,7 +289,7 @@ namespace SimpleDataGrid
             Keyboard.Focus(txt);
             txt.Select(0, 2);
         }
-        
+
         public List<List<object>> ExportData()
         {
             var result = new List<List<object>>();
