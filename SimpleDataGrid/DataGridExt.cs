@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using SimpleDataGrid.ViewModel;
 using System.Collections;
+using System.Linq;
 
 namespace SimpleDataGrid
 {
@@ -166,29 +167,29 @@ namespace SimpleDataGrid
             base.OnSelectionChanged(e);
         }
 
-        public int FindFirstEditableColumnIndex(int beginIndex, DataGrid dataGrid)
+        public DataGridColumn FindFirstEditableColumn(int beginDisplayIndex = 0)
         {
-            var index = -1;
-            for (int i = beginIndex; i < dataGrid.Columns.Count; i++)
+            for (int i = beginDisplayIndex; i < Columns.Count; i++)
             {
-                if (dataGrid.Columns[i].IsReadOnly == false
-                    && SkippedColumnIndex.Contains(i) == false)
+                if (SkippedColumnIndex.Contains(i) == true)
+                    continue;
+                var col = Columns.First(p => p.DisplayIndex == i);
+                if (col.IsReadOnly == false)
                 {
-                    index = i;
-                    break;
+                    return col;
                 }
             }
 
-            return index;
+            return null;
         }
 
-        public void FocusCell(int row, int column, bool callBeginEdit = true)
+        public void FocusCell(int row, DataGridColumn column, bool callBeginEdit = true)
         {
             Keyboard.Focus(this);
 
             SelectedIndex = row;
 
-            CurrentCell = new DataGridCellInfo(Items[row], Columns[column]);
+            CurrentCell = new DataGridCellInfo(Items[row], column);
 
             if (callBeginEdit)
             {
@@ -204,21 +205,23 @@ namespace SimpleDataGrid
 
             if (SelectedIndex == -1) return;
 
-            var current = Columns.IndexOf(CurrentColumn);
+            e.Handled = true;
 
-            var index = FindFirstEditableColumnIndex(current + 1, this);
+            var current = CurrentColumn.DisplayIndex;
 
-            if (index != -1)
+            var firstEditableColumn = FindFirstEditableColumn(current + 1);
+
+            if (firstEditableColumn != null)
             {
-                CurrentCell = new DataGridCellInfo(Items[SelectedIndex], Columns[index]);
+                CurrentCell = new DataGridCellInfo(Items[SelectedIndex], firstEditableColumn);
 
                 BeginEdit();
             }
-            else//move to next row, select first editable column
+            else //move to next row, select first editable column            
             {
                 CommitEdit();
 
-                var firstEditableColumnIndex = FindFirstEditableColumnIndex(0, this);
+                firstEditableColumn = FindFirstEditableColumn();
 
                 const int itemPlaceHolderCount = 1;
                 if (SelectedIndex < Items.Count - 1 - itemPlaceHolderCount)
@@ -234,12 +237,10 @@ namespace SimpleDataGrid
                     SelectedIndex = Items.Count - 1 - itemPlaceHolderCount;
                 }
 
-                CurrentCell = new DataGridCellInfo(Items[SelectedIndex], Columns[firstEditableColumnIndex]);
+                CurrentCell = new DataGridCellInfo(Items[SelectedIndex], firstEditableColumn);
 
                 BeginEdit();
             }
-
-            e.Handled = true;
         }
 
         protected override void OnPreparingCellForEdit(DataGridPreparingCellForEditEventArgs e)
