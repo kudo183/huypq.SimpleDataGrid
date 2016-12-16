@@ -35,6 +35,8 @@ namespace SimpleDataGrid
         public SimpleCommand SaveCommand { get; set; }
         
         public object SelectedValue { get; set; }
+
+        public object SelectedItem { get; set; }
     }
 
     public static class DesignTimeTestData
