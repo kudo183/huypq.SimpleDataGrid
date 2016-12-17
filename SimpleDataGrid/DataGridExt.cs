@@ -90,6 +90,8 @@ namespace SimpleDataGrid
 
         private void NewValue_BeginReset()
         {
+            CommitEdit(DataGridEditingUnit.Row, true);
+
             switch (KeepSelectionType)
             {
                 case KeepSelection.NotKeepSelection:
@@ -246,10 +248,10 @@ namespace SimpleDataGrid
         protected override void OnPreparingCellForEdit(DataGridPreparingCellForEditEventArgs e)
         {
             base.OnPreparingCellForEdit(e);
-            var count = System.Windows.Media.VisualTreeHelper.GetChildrenCount(e.EditingElement);
+            var count = VisualTreeHelper.GetChildrenCount(e.EditingElement);
 
             var editingElementType = e.EditingElement.GetType();
-            if (editingElementType.IsSubclassOf(typeof(ComboBox)) == true)
+            if (editingElementType == typeof(ComboBox))
             {
                 ActiveComboBox(e.EditingElement as ComboBox);
                 return;
@@ -263,13 +265,13 @@ namespace SimpleDataGrid
             //for template column: e.EditingElement is ContentPresenter
             for (int i = 0; i < count; i++)
             {
-                var element = System.Windows.Media.VisualTreeHelper.GetChild(e.EditingElement, i);
+                var element = VisualTreeHelper.GetChild(e.EditingElement, i);
                 var type = element.GetType();
                 if (type == typeof(DatePicker))
                 {
                     ActiveDatePicker(element as DatePicker);
                 }
-                else if (type.IsSubclassOf(typeof(ComboBox)) == true)
+                else if (editingElementType == typeof(ComboBox))
                 {
                     ActiveComboBox(element as ComboBox);
                 }

@@ -11,9 +11,6 @@ namespace SimpleDataGrid
     /// </summary>
     public partial class DataGridComboBoxColumnExt : DataGridComboBoxColumn
     {
-        private FrameworkElement _editingElement;
-        private TextBox _editableTextBox;
-
         public DataGridComboBoxColumnExt()
         {
             InitializeComponent();
@@ -31,15 +28,13 @@ namespace SimpleDataGrid
             var binding = BindingOperations.GetBinding(this, ComboBox.ItemsSourceProperty);
             ApplyBinding(binding, comboBox, ComboBoxEx.ItemsSourceExProperty);
 
-            _editableTextBox = null;
-            _editingElement = comboBox;
-
             return comboBox;
         }
 
         protected override FrameworkElement GenerateElement(DataGridCell cell, object dataItem)
         {
             var comboBox = new TextBlockComboBox();
+            comboBox.IsEditable = false;
 
             ApplyStyle(false, false, comboBox);
             ApplyColumnProperties(comboBox);
@@ -125,26 +120,5 @@ namespace SimpleDataGrid
             }
         }
         #endregion
-
-        void comboBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            //fixbug unikey: because textbox auto select text cause the unikey replace wrong character, need more one Back key to remove selected text
-            //if Back key and selected text != null, remove selected text
-            if (e.Key == Key.Back)
-            {
-                if (_editableTextBox == null)
-                {
-                    var combo = _editingElement as ComboBox;
-                    _editableTextBox = combo.Template.FindName("PART_EditableTextBox", combo) as TextBox;
-                }
-
-                if (string.IsNullOrEmpty(_editableTextBox.SelectedText) == false)
-                {
-                    _editableTextBox.Text = _editableTextBox.Text.Remove(_editableTextBox.SelectionStart,
-                                                                         _editableTextBox.SelectionLength);
-                    _editableTextBox.Select(_editableTextBox.Text.Length, 0);
-                }
-            }
-        }
     }
 }

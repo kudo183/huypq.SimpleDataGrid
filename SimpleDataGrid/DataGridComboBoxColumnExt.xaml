@@ -62,7 +62,8 @@
                                     <SimpleDataGrid:ComboBoxEx Grid.Row="1"
                                               Margin="1,0,1,0"
                                               ItemsSourceEx="{Binding ItemSource}"
-                                              SelectedValue="{Binding FilterValue}"
+                                              SelectedValue="{Binding FilterValue, UpdateSourceTrigger=Explicit}"
+                                              IsUseDropDownClosedSelectedValueBinding="true"
                                               DisplayMemberPath="{Binding DisplayMemberPath}"
                                               SelectedValuePath="{Binding SelectedValuePath}"
                                               IsEnabled="{Binding Path=IsUsed}"/>
@@ -79,12 +80,4 @@
             </Style.Triggers>
         </Style>
     </DataGridComboBoxColumn.HeaderStyle>
-    <DataGridComboBoxColumn.EditingElementStyle>
-        <Style TargetType="ComboBox">
-            <Setter Property="IsEditable" Value="True"/>
-            <Setter Property="IsTextSearchEnabled" Value="True"/>
-            <Setter Property="StaysOpenOnEdit" Value="True"/>
-            <EventSetter Event="UIElement.PreviewKeyDown" Handler="comboBox_KeyDown"/>
-        </Style>
-    </DataGridComboBoxColumn.EditingElementStyle>
 </DataGridComboBoxColumn>
