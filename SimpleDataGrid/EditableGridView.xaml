@@ -6,6 +6,16 @@
              xmlns:SimpleDataGrid="clr-namespace:SimpleDataGrid" mc:Ignorable="d"
              d:DataContext="{x:Static SimpleDataGrid:DesignTimeTestData.ViewModel}"
              d:DesignHeight="300">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type DataGridCell}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Column.IsReadOnly, Mode=OneWay}" Value="True">
+                    <Setter Property="Background" Value="LightGray"/>
+                    <Setter Property="IsTabStop" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
