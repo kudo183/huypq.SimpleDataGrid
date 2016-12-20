@@ -24,7 +24,6 @@
         <SimpleDataGrid:DataGridExt
             x:Name="dataGrid"
             x:FieldModifier="public"
-            SelectedItem="{Binding SelectedItem}"
             SelectedValue="{Binding SelectedValue}"
             SelectedValuePath="{Binding SelectedValuePath}"
             Grid.Row="0"
