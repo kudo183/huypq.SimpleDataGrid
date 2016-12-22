@@ -7,29 +7,34 @@
                     mc:Ignorable="d" Width="200">
     <DataGridTextColumn.HeaderStyle>
         <Style TargetType="DataGridColumnHeader">
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="ContentTemplate">
-                <Setter.Value>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="20"/>
-                                <RowDefinition Height="25"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <TextBlock Text="{Binding Name}" Margin="2,0,2,0" FontWeight="Bold"/>
-                                <CheckBox Margin="2,0,2,0" VerticalAlignment="Center" IsChecked="{Binding Path=IsUsed}"/>
-                            </StackPanel>
-                            <SimpleDataGrid:TextBoxExt
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding FilterType}" Value="TextFilter">
+                    <Setter Property="ContentTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="25"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding Name}" Margin="2,0,2,0" FontWeight="Bold"/>
+                                        <CheckBox Margin="2,0,2,0" VerticalAlignment="Center" IsChecked="{Binding Path=IsUsed}"/>
+                                    </StackPanel>
+                                    <SimpleDataGrid:TextBoxExt
                                 Grid.Row="1"
                                 Margin="0"
                                 Text="{Binding FilterValue, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
                                 IsUseEnterKeyPressBinding="True"
                                 IsEnabled="{Binding Path=IsUsed}"/>
-                        </Grid>
-                    </DataTemplate>
-                </Setter.Value>
-            </Setter>
+                                </Grid>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
     </DataGridTextColumn.HeaderStyle>
 </DataGridTextColumn>
