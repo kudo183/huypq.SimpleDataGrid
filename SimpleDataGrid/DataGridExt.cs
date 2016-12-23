@@ -297,18 +297,22 @@ namespace SimpleDataGrid
         {
             var result = new List<List<object>>();
 
-            var bindingsPath = new List<string>();
+            var bindingsInfo = new List<BindingInfo>();
 
             var header = new List<object>();
 
-            foreach (var column in Columns)
+            foreach (var column in Columns.OrderBy(p => p.DisplayIndex))
             {
                 if (column.Visibility == Visibility.Visible)
                 {
                     if (column is DataGridBoundColumn)
                     {
                         var temp = column as DataGridBoundColumn;
-                        bindingsPath.Add((temp.Binding as System.Windows.Data.Binding).Path.Path);
+                        bindingsInfo.Add(new BindingInfo()
+                        {
+                            Type = 0,
+                            Path = (temp.Binding as System.Windows.Data.Binding).Path.Path
+                        });
 
                         if (temp.Header is HeaderFilterBaseModel)
                             header.Add((temp.Header as HeaderFilterBaseModel).Name);
@@ -319,10 +323,25 @@ namespace SimpleDataGrid
                     {
                         var temp = column as DataGridComboBoxColumn;
                         if (temp.TextBinding != null)
-                            bindingsPath.Add((temp.TextBinding as System.Windows.Data.Binding).Path.Path);
+                        {
+                            bindingsInfo.Add(new BindingInfo()
+                            {
+                                Type = 0,
+                                Path = (temp.TextBinding as System.Windows.Data.Binding).Path.Path
+                            });
+                        }
                         else
-                            bindingsPath.Add((temp.SelectedValueBinding as System.Windows.Data.Binding).Path.Path);
-
+                        {
+                            var binding = System.Windows.Data.BindingOperations.GetBinding(temp, ComboBox.ItemsSourceProperty);
+                            bindingsInfo.Add(new BindingInfo()
+                            {
+                                Type = 1,
+                                Path = (temp.SelectedValueBinding as System.Windows.Data.Binding).Path.Path,
+                                DisplayPath = temp.DisplayMemberPath,
+                                SelectedValuePath = temp.SelectedValuePath,
+                                ItemsSourcePath = binding.Path.Path
+                            });
+                        }
                         if (temp.Header is HeaderFilterBaseModel)
                             header.Add((temp.Header as HeaderFilterBaseModel).Name);
                         else
@@ -337,16 +356,51 @@ namespace SimpleDataGrid
             {
                 var row = new List<object>();
 
-                foreach (var path in bindingsPath)
+                foreach (var binding in bindingsInfo)
                 {
-                    var t = DataBinderUtils.Eval(item, path);
-                    row.Add(t);
+                    switch (binding.Type)
+                    {
+                        case 0:
+                            row.Add(DataBinderUtils.Eval(item, binding.Path));
+                            break;
+                        case 1:
+                            var itemsSource = DataBinderUtils.Eval(item, binding.ItemsSourcePath) as IEnumerable;
+                            if (itemsSource == null)
+                            {
+                                row.Add(null);
+                                break;
+                            }
+
+                            var v = DataBinderUtils.Eval(item, binding.Path);
+                            foreach (var comboBoxItem in itemsSource)
+                            {
+                                var v1 = DataBinderUtils.Eval(comboBoxItem, binding.SelectedValuePath);
+                                if (v.Equals(v1) == true)
+                                {
+                                    row.Add(DataBinderUtils.Eval(comboBoxItem, binding.DisplayPath));
+                                    break;
+                                }
+                            }
+                            break;
+                        default:
+                            row.Add(null);
+                            break;
+                    }
                 }
 
                 result.Add(row);
             }
 
             return result;
+        }
+
+        private class BindingInfo
+        {
+            public int Type { get; set; }
+            public string Path { get; set; }
+            public string DisplayPath { get; set; }
+            public string SelectedValuePath { get; set; }
+            public string ItemsSourcePath { get; set; }
         }
     }
 }
