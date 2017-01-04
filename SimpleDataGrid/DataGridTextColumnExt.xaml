@@ -7,10 +7,11 @@
                     mc:Ignorable="d" Width="200">
     <DataGridTextColumn.HeaderStyle>
         <Style TargetType="DataGridColumnHeader">
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding FilterType}" Value="TextFilter">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                     <Setter Property="ContentTemplate">
                         <Setter.Value>
                             <DataTemplate>
