@@ -31,26 +31,11 @@ namespace SimpleDataGrid.ViewModel
             get { return _currentPageIndex; }
             set
             {
-                if (_currentPageIndex != value)
+                SetCurrentPageIndexWithoutAction(value);
+
+                if (ActionCurrentPageIndexChanged != null)
                 {
-                    var oldIndex = _currentPageIndex;
-                    var newIndex = value;
-
-                    _currentPageIndex = value;
-                    OnPropertyChanged("CurrentPageIndex");
-                    if (ActionCurrentPageIndexChanged != null)
-                    {
-                        ActionCurrentPageIndexChanged();
-                    }
-
-                    if (oldIndex == 1 || newIndex == 1)
-                    {
-                        PrevCommand.RaiseCanExecuteChanged();
-                    }
-                    if (oldIndex == _pageCount || newIndex == _pageCount)
-                    {
-                        NextCommand.RaiseCanExecuteChanged();
-                    }
+                    ActionCurrentPageIndexChanged();
                 }
             }
         }
@@ -109,6 +94,27 @@ namespace SimpleDataGrid.ViewModel
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void SetCurrentPageIndexWithoutAction(int value)
+        {
+            if (_currentPageIndex == value || value == 0)
+                return;
+
+            var oldIndex = _currentPageIndex;
+            var newIndex = value;
+
+            _currentPageIndex = value;
+            OnPropertyChanged("CurrentPageIndex");
+
+            if (oldIndex == 1 || newIndex == 1)
+            {
+                PrevCommand.RaiseCanExecuteChanged();
+            }
+            if (oldIndex == _pageCount || newIndex == _pageCount)
+            {
+                NextCommand.RaiseCanExecuteChanged();
+            }
         }
     }
 }
