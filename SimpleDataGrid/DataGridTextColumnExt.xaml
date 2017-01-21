@@ -15,22 +15,14 @@
                     <Setter Property="ContentTemplate">
                         <Setter.Value>
                             <DataTemplate>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="20"/>
-                                        <RowDefinition Height="25"/>
-                                    </Grid.RowDefinitions>
-                                    <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding Name}" Margin="2,0,2,0" FontWeight="Bold"/>
-                                        <CheckBox Margin="2,0,2,0" VerticalAlignment="Center" IsChecked="{Binding Path=IsUsed}"/>
-                                    </StackPanel>
+                                <SimpleDataGrid:DataGridHeader>
                                     <SimpleDataGrid:TextBoxExt
-                                Grid.Row="1"
-                                Margin="0"
-                                Text="{Binding FilterValue, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
-                                IsUseEnterKeyPressBinding="True"
-                                IsEnabled="{Binding Path=IsUsed}"/>
-                                </Grid>
+                                        Grid.Row="1"
+                                        Margin="0"
+                                        Text="{Binding FilterValue, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
+                                        IsUseEnterKeyPressBinding="True"
+                                        IsEnabled="{Binding Path=IsUsed}"/>
+                                </SimpleDataGrid:DataGridHeader>
                             </DataTemplate>
                         </Setter.Value>
                     </Setter>

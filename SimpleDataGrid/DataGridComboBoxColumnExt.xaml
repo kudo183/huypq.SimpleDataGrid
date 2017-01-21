@@ -12,32 +12,25 @@
                     <Setter Property="ContentTemplate">
                         <Setter.Value>
                             <DataTemplate>
-                                <Grid HorizontalAlignment="Stretch">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="20"/>
-                                        <RowDefinition Height="25"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding Name}" Margin="2,0,2,0" FontWeight="Bold"/>
-                                        <CheckBox Margin="2,0,2,0" VerticalAlignment="Center" IsChecked="{Binding Path=IsUsed}"/>
-                                    </StackPanel>
-                                    <SimpleDataGrid:TextBoxExt
-                                            Grid.Row="1"
+                                <SimpleDataGrid:DataGridHeader>
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <SimpleDataGrid:TextBoxExt
                                             HorizontalContentAlignment="Stretch"
                                             Text="{Binding FilterValue, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
                                             IsUseEnterKeyPressBinding="True"
                                             Margin="1,0,1,0"
                                             IsEnabled="{Binding Path=IsUsed}"/>
-                                    <Button Grid.Row="1" Grid.Column="1" Width="20" Padding="0,-1,0,0" Command="{Binding AddCommand}">
-                                        <Button.Content>
-                                            <TextBlock Text="➕"/>
-                                        </Button.Content>
-                                    </Button>
-                                </Grid>
+                                        <Button Grid.Column="1" Width="20" Padding="0,-1,0,0" Command="{Binding AddCommand}">
+                                            <Button.Content>
+                                                <TextBlock Text="➕"/>
+                                            </Button.Content>
+                                        </Button>
+                                    </Grid>
+                                </SimpleDataGrid:DataGridHeader>
                             </DataTemplate>
                         </Setter.Value>
                     </Setter>
@@ -46,20 +39,13 @@
                     <Setter Property="ContentTemplate">
                         <Setter.Value>
                             <DataTemplate>
-                                <Grid HorizontalAlignment="Stretch">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="20"/>
-                                        <RowDefinition Height="25"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding Name}" Margin="2,0,2,0" FontWeight="Bold"/>
-                                        <CheckBox Margin="2,0,2,0" VerticalAlignment="Center" IsChecked="{Binding Path=IsUsed}"/>
-                                    </StackPanel>
-                                    <SimpleDataGrid:ComboBoxEx Grid.Row="1"
+                                <SimpleDataGrid:DataGridHeader>
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <SimpleDataGrid:ComboBoxEx
                                               Margin="1,0,1,0"
                                               ItemsSourceEx="{Binding ItemSource}"
                                               SelectedValue="{Binding FilterValue, UpdateSourceTrigger=Explicit}"
@@ -67,12 +53,13 @@
                                               DisplayMemberPath="{Binding DisplayMemberPath}"
                                               SelectedValuePath="{Binding SelectedValuePath}"
                                               IsEnabled="{Binding Path=IsUsed}"/>
-                                    <Button Grid.Row="1" Grid.Column="1" Width="20" Padding="0,-1,0,0" Command="{Binding AddCommand}">
-                                        <Button.Content>
-                                            <TextBlock Text="➕"/>
-                                        </Button.Content>
-                                    </Button>
-                                </Grid>
+                                        <Button Grid.Column="1" Width="20" Padding="0,-1,0,0" Command="{Binding AddCommand}">
+                                            <Button.Content>
+                                                <TextBlock Text="➕"/>
+                                            </Button.Content>
+                                        </Button>
+                                    </Grid>
+                                </SimpleDataGrid:DataGridHeader>
                             </DataTemplate>
                         </Setter.Value>
                     </Setter>

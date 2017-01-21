@@ -1,9 +1,10 @@
 ﻿<DataGridCheckBoxColumn x:Class="SimpleDataGrid.DataGridCheckBoxColumnExt"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d">
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:SimpleDataGrid="clr-namespace:SimpleDataGrid"
+                        mc:Ignorable="d">
     <DataGridCheckBoxColumn.HeaderStyle>
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -13,17 +14,9 @@
                     <Setter Property="ContentTemplate">
                         <Setter.Value>
                             <DataTemplate>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="20"/>
-                                        <RowDefinition Height="25"/>
-                                    </Grid.RowDefinitions>
-                                    <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding Name}" Margin="2,0,2,0" FontWeight="Bold"/>
-                                        <CheckBox Margin="2,0,2,0" VerticalAlignment="Center" IsChecked="{Binding Path=IsUsed}"/>
-                                    </StackPanel>
-                                    <CheckBox Grid.Row="1" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{Binding Path=IsUsed}" IsChecked="{Binding Path=FilterValue}"/>
-                                </Grid>
+                                <SimpleDataGrid:DataGridHeader>
+                                    <CheckBox Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{Binding Path=IsUsed}" IsChecked="{Binding Path=FilterValue}"/>
+                                </SimpleDataGrid:DataGridHeader>
                             </DataTemplate>
                         </Setter.Value>
                     </Setter>
