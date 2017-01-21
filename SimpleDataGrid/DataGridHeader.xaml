@@ -5,6 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SimpleDataGrid"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="ToggleButton" x:Key="threeState">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="0 -2 0 0"/>
+            <Setter Property="Width" Value="18"/>
+            <Setter Property="Height" Value="18"/>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="False">
+                    <Setter Property="Content" Value="⇊"/>
+                    <Setter Property="Foreground" Value="Red"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="{x:Null}">
+                    <Setter Property="Content" Value="⇅"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Content" Value="⇈"/>
+                    <Setter Property="Foreground" Value="Blue"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <UserControl.Template>
         <ControlTemplate>
             <Grid HorizontalAlignment="Stretch">
@@ -13,6 +35,7 @@
                     <RowDefinition Height="25"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <ToggleButton IsThreeState="True" Style="{StaticResource threeState}" IsChecked="{Binding Path=IsSorted}"/>
                     <TextBlock Text="{Binding Name}" Margin="2,0,2,0" FontWeight="Bold"/>
                     <CheckBox Margin="2,0,2,0" VerticalAlignment="Center" IsChecked="{Binding Path=IsUsed}"/>
                 </StackPanel>

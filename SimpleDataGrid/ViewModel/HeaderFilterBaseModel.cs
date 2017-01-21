@@ -8,10 +8,12 @@ namespace SimpleDataGrid.ViewModel
         public string FilterType { get; set; }
 
         public string PropertyName { get; set; }
+        public string SortPropertyName { get; set; }
         public Type PropertyType { get; set; }
 
         public Action ActionIsUsedChanged { get; set; }
         public Action ActionFilterValueChanged { get; set; }
+        public Action ActionIsSortedChanged { get; set; }
 
         protected HeaderFilterBaseModel(string name, string filterType, string propertyName, Type propertyType)
         {
@@ -19,6 +21,7 @@ namespace SimpleDataGrid.ViewModel
             FilterType = filterType;
             PropertyName = propertyName;
             PropertyType = propertyType;
+            SortPropertyName = propertyName;
         }
 
         private string _name;
@@ -51,6 +54,23 @@ namespace SimpleDataGrid.ViewModel
                 _isUsed = value;
                 OnPropertyChanged(nameof(IsUsed));
                 PropertyChangedAction(nameof(IsUsed));
+            }
+        }
+
+        protected bool? _isSorted = null;
+        public bool? IsSorted
+        {
+            get { return _isSorted; }
+            set
+            {
+                if (IsSkipSet(_isSorted, value) == true)
+                {
+                    return;
+                }
+
+                _isSorted = value;
+                OnPropertyChanged(nameof(IsSorted));
+                PropertyChangedAction(nameof(IsSorted));
             }
         }
 
@@ -94,6 +114,11 @@ namespace SimpleDataGrid.ViewModel
             if (propertyName == nameof(FilterValue) && ActionFilterValueChanged != null)
             {
                 ActionFilterValueChanged();
+            }
+
+            if (propertyName == nameof(IsSorted) && ActionIsSortedChanged != null)
+            {
+                ActionIsSortedChanged();
             }
         }
 

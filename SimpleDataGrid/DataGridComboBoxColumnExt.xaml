@@ -6,9 +6,10 @@
                         xmlns:SimpleDataGrid="clr-namespace:SimpleDataGrid" mc:Ignorable="d" Width="200">
     <DataGridComboBoxColumn.HeaderStyle>
         <Style TargetType="DataGridColumnHeader">
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding FilterType}" Value="TextFilter">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                     <Setter Property="ContentTemplate">
                         <Setter.Value>
                             <DataTemplate>
@@ -36,6 +37,7 @@
                     </Setter>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding FilterType}" Value="ComboBoxFilter">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                     <Setter Property="ContentTemplate">
                         <Setter.Value>
                             <DataTemplate>

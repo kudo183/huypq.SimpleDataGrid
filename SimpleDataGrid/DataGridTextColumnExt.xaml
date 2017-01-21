@@ -8,7 +8,6 @@
     <DataGridTextColumn.HeaderStyle>
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="FontWeight" Value="Bold"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding FilterType}" Value="TextFilter">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
