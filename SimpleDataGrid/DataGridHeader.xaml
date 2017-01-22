@@ -11,17 +11,18 @@
             <Setter Property="Padding" Value="0 -2 0 0"/>
             <Setter Property="Width" Value="18"/>
             <Setter Property="Height" Value="18"/>
+            <Setter Property="FontSize" Value="12"/>
             <Style.Triggers>
                 <Trigger Property="IsChecked" Value="False">
-                    <Setter Property="Content" Value="⇊"/>
+                    <Setter Property="Content" Value="▼"/>
                     <Setter Property="Foreground" Value="Red"/>
                 </Trigger>
                 <Trigger Property="IsChecked" Value="{x:Null}">
-                    <Setter Property="Content" Value="⇅"/>
+                    <Setter Property="Content" Value="−"/>
                     <Setter Property="Foreground" Value="Black"/>
                 </Trigger>
                 <Trigger Property="IsChecked" Value="True">
-                    <Setter Property="Content" Value="⇈"/>
+                    <Setter Property="Content" Value="▲"/>
                     <Setter Property="Foreground" Value="Blue"/>
                 </Trigger>
             </Style.Triggers>
