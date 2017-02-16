@@ -15,6 +15,13 @@ namespace SimpleDataGrid.ViewModel
         public Action ActionFilterValueChanged { get; set; }
         public Action ActionIsSortedChanged { get; set; }
 
+        public enum SortDirection
+        {
+            Unsorted,
+            Ascending,
+            Descending
+        }
+
         protected HeaderFilterBaseModel(string name, string filterType, string propertyName, Type propertyType)
         {
             _name = name;
@@ -57,8 +64,8 @@ namespace SimpleDataGrid.ViewModel
             }
         }
 
-        protected bool? _isSorted = null;
-        public bool? IsSorted
+        protected SortDirection _isSorted = SortDirection.Unsorted;
+        public SortDirection IsSorted
         {
             get { return _isSorted; }
             set
