@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using SimpleDataGrid.ViewModel;
 
 namespace SimpleDataGrid
@@ -36,7 +37,94 @@ namespace SimpleDataGrid
         
         public object SelectedValue { get; set; }
 
-        public object SelectedItem { get; set; }
+        public TestData SelectedItem { get; set; }
+
+        public bool IsValid
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string Msg
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public object ParentItem
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public Action<object> ActionSelectedValueChanged
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string SelectedValuePath
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void Load()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void LoadReferenceData()
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetSelectedItem()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public static class DesignTimeTestData
