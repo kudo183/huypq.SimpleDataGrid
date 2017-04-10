@@ -10,6 +10,7 @@ namespace SimpleDataGrid.ViewModel
         public string PropertyName { get; set; }
         public string SortPropertyName { get; set; }
         public Type PropertyType { get; set; }
+        public bool IsShowInUI { get; set; }
 
         public Action ActionIsUsedChanged { get; set; }
         public Action ActionFilterValueChanged { get; set; }
@@ -29,6 +30,7 @@ namespace SimpleDataGrid.ViewModel
             PropertyName = propertyName;
             PropertyType = propertyType;
             SortPropertyName = propertyName;
+            IsShowInUI = true;
         }
 
         private string _name;
