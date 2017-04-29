@@ -71,6 +71,7 @@
       <DependentUpon>EditableGridView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ObservableCollectionEx.cs" />
+    <Compile Include="SortedObservableCollection.cs" />
     <Compile Include="Pager.xaml.cs">
       <DependentUpon>Pager.xaml</DependentUpon>
     </Compile>
