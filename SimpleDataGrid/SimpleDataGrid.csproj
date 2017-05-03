@@ -80,6 +80,7 @@
     <Compile Include="Test.xaml.cs">
       <DependentUpon>Test.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TextManager.cs" />
     <Compile Include="Utils\SimpleCommand.cs" />
     <Compile Include="TextBoxExt.cs" />
     <Compile Include="Utils\DataBinderUtils.cs" />

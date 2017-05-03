@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:SimpleDataGrid="clr-namespace:SimpleDataGrid" mc:Ignorable="d"
+             xmlns:SimpleDataGrid="clr-namespace:SimpleDataGrid"
+             mc:Ignorable="d"
              d:DataContext="{x:Static SimpleDataGrid:DesignTimeTestData.ViewModel}"
              d:DesignHeight="300">
     <UserControl.Resources>
@@ -33,11 +34,11 @@
             SelectionMode="Single">
         </SimpleDataGrid:DataGridExt>
         <StackPanel Grid.Row="1">
-            <StackPanel  x:Name="sp" Orientation="Horizontal">
+            <StackPanel x:Name="sp" Orientation="Horizontal">
                 <SimpleDataGrid:Pager DataContext="{Binding PagerViewModel}"/>
                 <StackPanel Orientation="Horizontal" Margin="30,0,0,0">
-                    <Button x:Name="btnSave" Content="Lưu" VerticalAlignment="Top" Width="75" Margin="5" Command="{Binding SaveCommand}"/>
-                    <Button x:Name="btnLoad" Content="Hủy" VerticalAlignment="Top" Width="75" Margin="5" Command="{Binding LoadCommand}"/>
+                    <Button x:Name="btnSave" Content="{x:Static SimpleDataGrid:TextManager.Save}" VerticalAlignment="Top" Width="75" Margin="5" Command="{Binding SaveCommand}"/>
+                    <Button x:Name="btnLoad" Content="{x:Static SimpleDataGrid:TextManager.Load}" VerticalAlignment="Top" Width="75" Margin="5" Command="{Binding LoadCommand}"/>
                 </StackPanel>
             </StackPanel>
             <TextBlock Text="{Binding Msg}" FontSize="12" Foreground="Blue"/>
