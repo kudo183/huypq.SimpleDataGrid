@@ -41,6 +41,7 @@
                     <ToggleButton IsThreeState="True" Style="{StaticResource threeState}" IsChecked="{Binding Path=IsSorted, Converter={StaticResource sortDirectionToBooleanConverter}}"/>
                     <TextBlock Text="{Binding Name}" Margin="2,0,2,0" FontWeight="Bold"/>
                     <CheckBox Margin="2,0,2,0" VerticalAlignment="Center" IsChecked="{Binding Path=IsUsed}"/>
+                    <Button Content="x" Command="{Binding ClearFilterValueCommand}" Margin="0" Padding="0 -2 -1 0" Width="18" Height="18" FontSize="12"/>
                 </StackPanel>
                 <ContentPresenter Grid.Row="1" Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content}" />
             </Grid>

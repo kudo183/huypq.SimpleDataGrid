@@ -31,6 +31,10 @@ namespace SimpleDataGrid.ViewModel
             PropertyType = propertyType;
             SortPropertyName = propertyName;
             IsShowInUI = true;
+            ClearFilterValueCommand = new SimpleCommand(nameof(ClearFilterValueCommand), () =>
+            {
+                FilterValue = null;
+            });
         }
 
         private string _name;
@@ -100,12 +104,13 @@ namespace SimpleDataGrid.ViewModel
             }
         }
 
+        public SimpleCommand ClearFilterValueCommand { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public virtual void OnPropertyChanged(string propertyName)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public virtual void PropertyChangedAction(string propertyName)
