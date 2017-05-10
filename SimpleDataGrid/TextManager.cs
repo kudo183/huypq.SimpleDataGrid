@@ -6,7 +6,7 @@
         {
             page = "page";
             of = "of";
-            rows = "wows";
+            rows = "rows";
             load = "Load";
             save = "Save";
         }
