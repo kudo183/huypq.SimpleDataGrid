@@ -63,6 +63,9 @@
     <Compile Include="DataGridHeader.xaml.cs">
       <DependentUpon>DataGridHeader.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataGridRightAlignTextColumn.xaml.cs">
+      <DependentUpon>DataGridRightAlignTextColumn.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataGridTextColumnExt.xaml.cs">
       <DependentUpon>DataGridTextColumnExt.xaml</DependentUpon>
     </Compile>
@@ -113,6 +116,10 @@
     <Page Include="DataGridHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataGridRightAlignTextColumn.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="DataGridTextColumnExt.xaml">
       <Generator>MSBuild:Compile</Generator>
