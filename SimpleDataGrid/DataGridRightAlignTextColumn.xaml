@@ -37,7 +37,7 @@
     </DataGridTextColumn.ElementStyle>
     <DataGridTextColumn.EditingElementStyle>
         <Style TargetType="TextBox">
-            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="HorizontalContentAlignment" Value="Right"/>
         </Style>
     </DataGridTextColumn.EditingElementStyle>
 </DataGridTextColumn>
