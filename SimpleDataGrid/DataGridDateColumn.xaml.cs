@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -17,20 +16,50 @@ namespace SimpleDataGrid
             InitializeComponent();
         }
 
+        protected override object PrepareCellForEdit(FrameworkElement editingElement, RoutedEventArgs editingEventArgs)
+        {
+            var dp = editingElement as DatePicker;
+            if (dp != null)
+            {
+                var dt = dp.SelectedDate;
+                if (dt.HasValue)
+                    return dt.Value;
+            }
+            return DateTime.Today;
+        }
+
         protected override void CancelCellEdit(FrameworkElement editingElement, object uneditedValue)
         {
             var dp = editingElement as DatePicker;
             if (dp != null)
             {
-                dp.SelectedDate = DateTime.Parse(uneditedValue.ToString());
+                //clear DatePicker textbox text to make sure Text will sync with SelectedDate when call UpdateTarget of SelectedDateProperty,
+                //if not clear, textbox may keep text un-sync with SelectedDate, when lost focus or Enter key press, Text will update back to SelectedDate
+                dp.Text = "";
+
+                var exp = dp.GetBindingExpression(DatePicker.SelectedDateProperty);
+                exp.UpdateTarget();
             }
+        }
+
+        protected override bool CommitCellEdit(FrameworkElement editingElement)
+        {
+            var dp = editingElement as DatePicker;
+            if (dp != null)
+            {
+                var exp = dp.GetBindingExpression(DatePicker.SelectedDateProperty);
+                exp.UpdateSource();
+                return !Validation.GetHasError(dp);
+            }
+
+            return true;
         }
 
         protected override FrameworkElement GenerateEditingElement(DataGridCell cell, object dataItem)
         {
             var dp = new DatePicker { };
             dp.SetBinding(DatePicker.SelectedDateProperty, Binding);
-            
+
             dp.PreviewKeyDown += dp_PreviewKeyDown;
 
             return dp;
@@ -46,7 +75,7 @@ namespace SimpleDataGrid
                 {
                     RoutedEvent = Keyboard.KeyDownEvent
                 };
-                
+
                 //don't know why the DataGrid will get one more event from DataGridCell (2 event fired, can check by override DataGrid OnKeyDown method)
                 this.DataGridOwner.RaiseEvent(evt);
             }
@@ -60,41 +89,10 @@ namespace SimpleDataGrid
 
             var binding = new Binding(b.Path.Path);
             binding.StringFormat = "{0:d}";
-            binding.UpdateSourceTrigger = b.UpdateSourceTrigger;
 
             txt.SetBinding(TextBlock.TextProperty, binding);
 
             return txt;
-        }
-
-        protected override object PrepareCellForEdit(FrameworkElement editingElement, RoutedEventArgs editingEventArgs)
-        {
-            var dp = editingElement as DatePicker;
-            if (dp != null)
-            {
-                var dt = dp.SelectedDate;
-                if (dt.HasValue)
-                    return dt.Value;
-            }
-            return DateTime.Today;
-        }
-
-        public class DateTimeConverter : IValueConverter
-        {
-            public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                var date = (DateTime)value;
-
-                return date.ToString(parameter.ToString());
-            }
-
-            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                var strValue = value.ToString();
-                DateTime resultDateTime;
-
-                return DateTime.TryParse(strValue, out resultDateTime) ? resultDateTime : value;
-            }
         }
     }
 }
