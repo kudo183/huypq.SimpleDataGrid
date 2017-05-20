@@ -60,6 +60,9 @@
       <DependentUpon>DataGridDateColumn.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataGridExt.cs" />
+    <Compile Include="DataGridForeignKeyColumn.xaml.cs">
+      <DependentUpon>DataGridForeignKeyColumn.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataGridHeader.xaml.cs">
       <DependentUpon>DataGridHeader.xaml</DependentUpon>
     </Compile>
@@ -112,6 +115,10 @@
     <Page Include="DataGridDateColumn.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataGridForeignKeyColumn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DataGridHeader.xaml">
       <SubType>Designer</SubType>
