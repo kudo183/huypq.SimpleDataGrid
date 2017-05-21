@@ -14,8 +14,6 @@ namespace SimpleDataGrid
         public DataGridComboBoxColumnExt()
         {
             InitializeComponent();
-            SelectedValuePath = "Key";
-            DisplayMemberPath = "Value";
         }
 
         protected override FrameworkElement GenerateEditingElement(DataGridCell cell, object dataItem)
