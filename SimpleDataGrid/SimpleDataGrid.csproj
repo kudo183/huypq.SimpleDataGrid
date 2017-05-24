@@ -53,6 +53,7 @@
     <Compile Include="DataGridCheckBoxColumnExt.xaml.cs">
       <DependentUpon>DataGridCheckBoxColumnExt.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataGridColumnAttachedProperty.cs" />
     <Compile Include="DataGridComboBoxColumnExt.xaml.cs">
       <DependentUpon>DataGridComboBoxColumnExt.xaml</DependentUpon>
     </Compile>

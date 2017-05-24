@@ -175,11 +175,16 @@ namespace SimpleDataGrid
             {
                 if (SkippedColumnIndex.Contains(i) == true)
                     continue;
+
                 var col = Columns.First(p => p.DisplayIndex == i);
-                if (col.IsReadOnly == false)
-                {
-                    return col;
-                }
+
+                if (DataGridColumnAttachedProperty.GetIsTabStop(col) == false)
+                    continue;
+
+                if (col.IsReadOnly == true)
+                    continue;
+
+                return col;
             }
 
             return null;
