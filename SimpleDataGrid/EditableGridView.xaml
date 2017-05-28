@@ -33,9 +33,9 @@
             ItemsSourceEx="{Binding Entities}"
             SelectionMode="Single">
         </SimpleDataGrid:DataGridExt>
-        <StackPanel Grid.Row="1">
+        <StackPanel Grid.Row="1" Background="{Binding ElementName=dataGrid, Path=Background}">
             <StackPanel x:Name="sp" Orientation="Horizontal">
-                <SimpleDataGrid:Pager DataContext="{Binding PagerViewModel}"/>
+                <SimpleDataGrid:Pager DataContext="{Binding PagerViewModel}" Foreground="Black"/>
                 <StackPanel Orientation="Horizontal" Margin="30,0,0,0">
                     <Button x:Name="btnSave" Content="{x:Static SimpleDataGrid:TextManager.Save}" VerticalAlignment="Top" Width="75" Margin="5" Command="{Binding SaveCommand}"/>
                     <Button x:Name="btnLoad" Content="{x:Static SimpleDataGrid:TextManager.Load}" VerticalAlignment="Top" Width="75" Margin="5" Command="{Binding LoadCommand}"/>
