@@ -253,8 +253,7 @@ namespace SimpleDataGrid
         protected override void OnPreparingCellForEdit(DataGridPreparingCellForEditEventArgs e)
         {
             base.OnPreparingCellForEdit(e);
-            var count = VisualTreeHelper.GetChildrenCount(e.EditingElement);
-
+            
             var editingElementType = e.EditingElement.GetType();
             if (editingElementType == typeof(ComboBox))
             {
@@ -266,8 +265,14 @@ namespace SimpleDataGrid
                 ActiveDatePicker(e.EditingElement as DatePicker);
                 return;
             }
+            if (editingElementType == typeof(ForeignKeyPicker))
+            {
+                ActiveForeignKeyPicker(e.EditingElement as ForeignKeyPicker);
+                return;
+            }
 
             //for template column: e.EditingElement is ContentPresenter
+            var count = VisualTreeHelper.GetChildrenCount(e.EditingElement);
             for (int i = 0; i < count; i++)
             {
                 var element = VisualTreeHelper.GetChild(e.EditingElement, i);
@@ -275,10 +280,17 @@ namespace SimpleDataGrid
                 if (type == typeof(DatePicker))
                 {
                     ActiveDatePicker(element as DatePicker);
+                    return;
                 }
-                else if (editingElementType == typeof(ComboBox))
+                if (editingElementType == typeof(ComboBox))
                 {
                     ActiveComboBox(element as ComboBox);
+                    return;
+                }
+                if (editingElementType == typeof(ForeignKeyPicker))
+                {
+                    ActiveForeignKeyPicker(e.EditingElement as ForeignKeyPicker);
+                    return;
                 }
             }
         }
@@ -296,6 +308,13 @@ namespace SimpleDataGrid
             var txt = VisualTreeUtils.FindChild<TextBox>(datePicker, "PART_TextBox");
             Keyboard.Focus(txt);
             txt.Select(0, 2);
+        }
+
+        private void ActiveForeignKeyPicker(ForeignKeyPicker foreignKeyPicker)
+        {
+            var txt = VisualTreeUtils.FindChild<TextBox>(foreignKeyPicker, "PART_TextBox");
+            Keyboard.Focus(txt);
+            txt.SelectAll();
         }
 
         public List<List<object>> ExportData()
