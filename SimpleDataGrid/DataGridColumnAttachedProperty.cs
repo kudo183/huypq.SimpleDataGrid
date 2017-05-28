@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 
 namespace SimpleDataGrid
 {
@@ -22,6 +16,6 @@ namespace SimpleDataGrid
 
         // Using a DependencyProperty as the backing store for IsTabStop.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsTabStopProperty =
-            DependencyProperty.RegisterAttached("IsTabStop", typeof(bool), typeof(DataGridColumn), new PropertyMetadata(true));
+            DependencyProperty.RegisterAttached("IsTabStop", typeof(bool), typeof(DataGridColumnAttachedProperty), new PropertyMetadata(true));
     }
 }
