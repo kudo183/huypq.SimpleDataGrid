@@ -13,7 +13,19 @@ namespace SimpleDataGrid
     {
         public Binding DisplayTextBinding { get; set; }
 
-        public FrameworkElement PopupView { get; set; }
+        UserControl popupView;
+        public UserControl PopupView
+        {
+            get { return popupView; }
+            set
+            {
+                popupView = value;
+                popupView.Padding = new Thickness(3);
+                popupView.Background = new SolidColorBrush(Color.FromRgb(45, 153, 115));
+                popupView.Width = 600;
+                popupView.Height = 400;
+            }
+        }
 
         public string SelectedIDPath { get; set; } = "SelectedValue";
 
