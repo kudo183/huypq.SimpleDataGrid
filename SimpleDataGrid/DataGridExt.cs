@@ -196,11 +196,14 @@ namespace SimpleDataGrid
 
             SelectedIndex = row;
 
-            CurrentCell = new DataGridCellInfo(Items[row], column);
-
-            if (callBeginEdit)
+            if (column != null)
             {
-                BeginEdit();
+                CurrentCell = new DataGridCellInfo(Items[row], column);
+
+                if (callBeginEdit)
+                {
+                    BeginEdit();
+                }
             }
         }
 
@@ -253,7 +256,7 @@ namespace SimpleDataGrid
         protected override void OnPreparingCellForEdit(DataGridPreparingCellForEditEventArgs e)
         {
             base.OnPreparingCellForEdit(e);
-            
+
             var editingElementType = e.EditingElement.GetType();
             if (editingElementType == typeof(ComboBox))
             {
