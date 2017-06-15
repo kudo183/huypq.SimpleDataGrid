@@ -31,6 +31,7 @@ namespace SimpleDataGrid.ViewModel
             PropertyType = propertyType;
             SortPropertyName = propertyName;
             IsShowInUI = true;
+            IsHitTestVisible = true;
             ClearFilterValueCommand = new SimpleCommand(nameof(ClearFilterValueCommand), () =>
             {
                 FilterValue = null;
@@ -50,6 +51,23 @@ namespace SimpleDataGrid.ViewModel
 
                 _name = value;
                 OnPropertyChanged(nameof(Name));
+            }
+        }
+
+        protected bool _isHitTestVisible = false;
+        public bool IsHitTestVisible
+        {
+            get { return _isHitTestVisible; }
+            set
+            {
+                if (IsSkipSet(_isHitTestVisible, value) == true)
+                {
+                    return;
+                }
+
+                _isHitTestVisible = value;
+                OnPropertyChanged(nameof(IsHitTestVisible));
+                PropertyChangedAction(nameof(IsHitTestVisible));
             }
         }
 

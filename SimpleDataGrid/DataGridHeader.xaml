@@ -32,7 +32,7 @@
     </UserControl.Resources>
     <UserControl.Template>
         <ControlTemplate>
-            <Grid HorizontalAlignment="Stretch">
+            <Grid HorizontalAlignment="Stretch" IsHitTestVisible="{Binding IsHitTestVisible}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="25"/>
@@ -43,7 +43,7 @@
                     <CheckBox Margin="2,0,2,0" VerticalAlignment="Center" IsChecked="{Binding Path=IsUsed}"/>
                     <Button Content="x" Command="{Binding ClearFilterValueCommand}" Margin="0" Padding="0 -2 -1 0" Width="18" Height="18" FontSize="12"/>
                 </StackPanel>
-                <ContentPresenter Grid.Row="1" Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content}" />
+                <ContentPresenter Grid.Row="1" Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content}"/>
             </Grid>
         </ControlTemplate>
     </UserControl.Template>
