@@ -10,7 +10,8 @@
         <TextBlock Text="{x:Static local:TextManager.Page}"
                    VerticalAlignment="Center"
                    Margin="5,0,5,0"/>
-        <TextBox Width="40"
+        <local:TextBoxExt Width="40"
+                 IsUseEnterKeyPressBinding="True"
                  VerticalContentAlignment="Center"
                  Text="{Binding CurrentPageIndex}"
                  IsEnabled="{Binding IsEnablePaging}"/>
