@@ -34,5 +34,31 @@ namespace SimpleDataGrid
         {
             InitializeComponent();
         }
+
+        public DataGridColumn FindColumn(string columnName)
+        {
+            foreach (var column in Columns)
+            {
+                var vm = column.Header as ViewModel.HeaderFilterBaseModel;
+                if (vm != null && vm.PropertyName == columnName)
+                {
+                    return column;
+                }
+            }
+            return null;
+        }
+
+        public ViewModel.HeaderFilterBaseModel FindHeaderFilter(string columnName)
+        {
+            foreach (var column in Columns)
+            {
+                var vm = column.Header as ViewModel.HeaderFilterBaseModel;
+                if (vm != null && vm.PropertyName == columnName)
+                {
+                    return vm;
+                }
+            }
+            return null;
+        }
     }
 }
