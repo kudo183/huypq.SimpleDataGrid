@@ -35,8 +35,43 @@ namespace SimpleDataGrid
             menuItem.Click += menuItem_Click;
             menu.Items.Add(menuItem);
             ContextMenu = menu;
+
+            GotFocus += DataGridExt_GotFocus;
         }
 
+        private void DataGridExt_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (_needUpdateSelectedIndexInGotFocusEvent == true)
+            {
+                var cell = e.OriginalSource as DataGridCell;
+                if (cell != null)
+                {
+                    var index = Items.IndexOf(CurrentCell.Item);
+                    if (SelectedIndex != index)
+                    {
+                        _needUpdateSelectedIndexInGotFocusEvent = false;
+                        SelectedIndex = index;
+                    }
+                }
+            }
+        }
+
+        private bool _needUpdateSelectedIndexInGotFocusEvent = false;
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+
+            if (e.Handled == false)
+            {
+                //SelectedIndex not update when move focus from header/footer to cell using Up/Down Arrow key
+                // -> need update SelectedIndex base on current focused cell in GotFocus event
+                if (Keyboard.IsKeyDown(Key.Down) || Keyboard.IsKeyDown(Key.Up))
+                {
+                    _needUpdateSelectedIndexInGotFocusEvent = true;
+                }
+            }
+        }
 
         public IEnumerable ItemsSourceEx
         {
@@ -315,9 +350,7 @@ namespace SimpleDataGrid
 
         private void ActiveForeignKeyPicker(ForeignKeyPicker foreignKeyPicker)
         {
-            var txt = VisualTreeUtils.FindChild<TextBox>(foreignKeyPicker, "PART_TextBox");
-            Keyboard.Focus(txt);
-            txt.SelectAll();
+            foreignKeyPicker.IsPopupOpen = true;
         }
 
         public List<List<object>> ExportData()

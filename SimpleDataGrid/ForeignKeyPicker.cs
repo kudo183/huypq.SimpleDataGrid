@@ -46,6 +46,20 @@ namespace SimpleDataGrid
                 }
                 return false;
             }
+            set
+            {
+                if (popup != null)
+                {
+                    if (value == true)
+                    {
+                        OpenPopup();
+                    }
+                    else
+                    {
+                        ClosePopup();
+                    }
+                }
+            }
         }
 
         private bool _disablePopupReopen;
@@ -69,6 +83,9 @@ namespace SimpleDataGrid
 
         static ForeignKeyPicker()
         {
+            EventManager.RegisterClassHandler(typeof(ForeignKeyPicker), UIElement.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(OnMouseLeftButtonDown));
+            EventManager.RegisterClassHandler(typeof(ForeignKeyPicker), UIElement.PreviewKeyDownEvent, new KeyEventHandler(OnPreviewKeyDown));
+            EventManager.RegisterClassHandler(typeof(ForeignKeyPicker), UIElement.KeyDownEvent, new KeyEventHandler(OnKeyDown));
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ForeignKeyPicker), new FrameworkPropertyMetadata(typeof(ForeignKeyPicker)));
             //KeyboardNavigation.TabNavigationProperty.OverrideMetadata(typeof(ForeignKeyPicker), new FrameworkPropertyMetadata(KeyboardNavigationMode.Once));
             KeyboardNavigation.IsTabStopProperty.OverrideMetadata(typeof(ForeignKeyPicker), new FrameworkPropertyMetadata(false));
@@ -81,7 +98,6 @@ namespace SimpleDataGrid
         {
             if (popup != null)
             {
-                popup.RemoveHandler(PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(popup_PreviewMouseLeftButtonDown));
                 popup.Opened -= popup_Opened;
                 popup.Closed -= popup_Closed;
                 popup.Child = null;
@@ -105,7 +121,6 @@ namespace SimpleDataGrid
 
             if (popup != null)
             {
-                popup.AddHandler(PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(popup_PreviewMouseLeftButtonDown));
                 popup.Opened += popup_Opened;
                 popup.Closed += popup_Closed;
 
@@ -135,6 +150,51 @@ namespace SimpleDataGrid
             }
         }
 
+        private static void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var foreignKeyPicker = sender as ForeignKeyPicker;
+
+            if (foreignKeyPicker.IsPopupOpen == true)
+            {
+                var p = (e.OriginalSource as FrameworkElement).Parent;
+                if (p is DataGridCell)
+                {
+                    foreignKeyPicker.ClosePopup();
+                    //not set Handled because need this event to update SelectedIndex
+                }
+            }
+        }
+
+        private static void OnPreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            var foreignKeyPicker = sender as ForeignKeyPicker;
+            if (e.Key == Key.Enter)
+            {
+                if (foreignKeyPicker.IsPopupOpen == true)
+                {
+                    if (e.OriginalSource is DataGridCell)
+                    {
+                        foreignKeyPicker.ClosePopup();
+                        e.Handled = true;//set Handled for not move to next row
+                    }
+                }
+            }
+        }
+
+        private static void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            var foreignKeyPicker = sender as ForeignKeyPicker;
+            if (e.Key == Key.Enter)
+            {
+                if (foreignKeyPicker.IsPopupOpen == true)
+                {
+                    //prevent Enter key bubble to parent when not Enter in DataGridCell
+                    //need set in this event instead of PreviewKeyDown event because if set in PreviewKeyDown event page index, header text filter, ... will not receive Enter key down event.
+                    e.Handled = true;
+                }
+            }
+        }
+
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var text = SelectedForeignKey.ToString();
@@ -156,7 +216,7 @@ namespace SimpleDataGrid
         {
             if (popup.IsOpen == true)
             {
-                popup.IsOpen = false;
+                ClosePopup();
             }
             else
             {
@@ -221,25 +281,6 @@ namespace SimpleDataGrid
             }
         }
 
-        private void popup_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (popup != null && !popup.StaysOpen)
-            {
-                var g = popup.Parent as Grid;
-                var dropDownButton = g.Children[1];
-                if (dropDownButton != null)
-                {
-                    if (dropDownButton.InputHitTest(e.GetPosition(dropDownButton)) != null)
-                    {
-                        // This popup is being closed by a mouse press on the drop down button
-                        // The following mouse release will cause the closed popup to immediately reopen.
-                        // Raise a flag to block reopeneing the popup
-                        _disablePopupReopen = true;
-                    }
-                }
-            }
-        }
-
         private void dropdownButton_MouseLeave(object sender, MouseEventArgs e)
         {
             _disablePopupReopen = false;
@@ -253,12 +294,11 @@ namespace SimpleDataGrid
             }
 
             popup.IsOpen = true;
+        }
 
-            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Input, (Action)delegate ()
-            {
-                // setting the focus to the calendar will focus the correct date.
-                PopupView.Focus();
-            });
+        private void ClosePopup()
+        {
+            popup.IsOpen = false;
         }
     }
 }
