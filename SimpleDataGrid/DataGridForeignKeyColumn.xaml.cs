@@ -76,26 +76,6 @@ namespace SimpleDataGrid
 
         protected override FrameworkElement GenerateEditingElement(DataGridCell cell, object dataItem)
         {
-            var visualParent = VisualTreeHelper.GetParent(PopupView);
-            if (visualParent != null)
-            {
-                var deco = visualParent as Decorator;
-                if (deco != null)
-                {
-                    deco.Child = null;
-                }
-            }
-
-            var logicalParent = PopupView.Parent;
-            if (logicalParent != null)
-            {
-                var p = PopupView.Parent as Popup;
-                if (p != null)
-                {
-                    p.Child = null;
-                }
-            }
-
             var element = new ForeignKeyPicker()
             {
                 PopupView = PopupView,

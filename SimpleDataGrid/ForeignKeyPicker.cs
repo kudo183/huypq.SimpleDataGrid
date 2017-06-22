@@ -32,7 +32,7 @@ namespace SimpleDataGrid
         private ButtonBase dropDownButton;
         private Popup popup;
         private TextBox textBox;
-        
+
         public FrameworkElement PopupView
         {
             get { return (FrameworkElement)GetValue(PopupViewProperty); }
@@ -95,6 +95,11 @@ namespace SimpleDataGrid
         {
             var fp = d as ForeignKeyPicker;
 
+            if (fp == null || fp.textBox == null)
+            {
+                return;
+            }
+
             fp.textBox.Text = fp.SelectedForeignKey.ToString();
         }
 
@@ -140,6 +145,26 @@ namespace SimpleDataGrid
             {
                 popup.Opened += popup_Opened;
                 popup.Closed += popup_Closed;
+
+                var visualParent = VisualTreeHelper.GetParent(PopupView);
+                if (visualParent != null)
+                {
+                    var deco = visualParent as Decorator;
+                    if (deco != null)
+                    {
+                        deco.Child = null;
+                    }
+                }
+
+                var logicalParent = PopupView.Parent;
+                if (logicalParent != null)
+                {
+                    var p = PopupView.Parent as Popup;
+                    if (p != null)
+                    {
+                        p.Child = null;
+                    }
+                }
 
                 popup.Child = PopupView;
 
