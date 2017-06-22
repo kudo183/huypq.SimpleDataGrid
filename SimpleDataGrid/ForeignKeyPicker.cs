@@ -32,9 +32,26 @@ namespace SimpleDataGrid
         private ButtonBase dropDownButton;
         private Popup popup;
         private TextBox textBox;
+        
+        public FrameworkElement PopupView
+        {
+            get { return (FrameworkElement)GetValue(PopupViewProperty); }
+            set { SetValue(PopupViewProperty, value); }
+        }
 
-        public FrameworkElement PopupView { get; set; }
-        public string PopupViewSelectedIDPath { get; set; }
+        // Using a DependencyProperty as the backing store for PopupView.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PopupViewProperty =
+            DependencyProperty.Register("PopupView", typeof(FrameworkElement), typeof(ForeignKeyPicker), new PropertyMetadata(null));
+
+        public string PopupViewSelectedIDPath
+        {
+            get { return (string)GetValue(PopupViewSelectedIDPathProperty); }
+            set { SetValue(PopupViewSelectedIDPathProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for PopupViewSelectedIDPath.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PopupViewSelectedIDPathProperty =
+            DependencyProperty.Register("PopupViewSelectedIDPath", typeof(string), typeof(ForeignKeyPicker), new PropertyMetadata(string.Empty));
 
         public bool IsPopupOpen
         {

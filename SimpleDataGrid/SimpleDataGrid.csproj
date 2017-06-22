@@ -94,6 +94,7 @@
     <Compile Include="Utils\DataBinderUtils.cs" />
     <Compile Include="Utils\VisualTreeUtils.cs" />
     <Compile Include="ViewModel\EditableGridViewModel.cs" />
+    <Compile Include="ViewModel\HeaderForeignKeyFilterModel.cs" />
     <Compile Include="ViewModel\HeaderCheckFilterModel.cs" />
     <Compile Include="ViewModel\HeaderComboBoxFilterModel.cs" />
     <Compile Include="ViewModel\HeaderDateFilterModel.cs" />

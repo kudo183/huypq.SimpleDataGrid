@@ -9,17 +9,17 @@
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding FilterType}" Value="TextFilter">
+                <DataTrigger Binding="{Binding FilterType}" Value="ForeignKeyFilter">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                     <Setter Property="ContentTemplate">
                         <Setter.Value>
                             <DataTemplate>
                                 <SimpleDataGrid:DataGridHeader>
-                                    <SimpleDataGrid:TextBoxExt
-                                        Grid.Row="1"
-                                        Margin="0"
-                                        Text="{Binding FilterValue, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
-                                        IsUseEnterKeyPressBinding="True"
+                                    <SimpleDataGrid:ForeignKeyPicker
+                                        Margin="1,0,1,0"
+                                        PopupView="{Binding PopupView}"
+                                        PopupViewSelectedIDPath="{Binding PopupViewSelectedIDPath}"
+                                        SelectedForeignKey="{Binding FilterValue}"
                                         IsEnabled="{Binding Path=IsUsed}"/>
                                 </SimpleDataGrid:DataGridHeader>
                             </DataTemplate>
