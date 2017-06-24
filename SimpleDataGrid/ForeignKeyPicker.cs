@@ -198,10 +198,14 @@ namespace SimpleDataGrid
 
             if (foreignKeyPicker.IsPopupOpen == true)
             {
-                var p = (e.OriginalSource as FrameworkElement).Parent;
-                if (p is DataGridCell)
+                var p = (e.OriginalSource as FrameworkElement).Parent as DataGridCell;
+                if (p != null)
                 {
-                    foreignKeyPicker.ClosePopup();
+                    var foreignKeyPickerChild = VisualTreeUtils.FindChild<ForeignKeyPicker>(foreignKeyPicker.PopupView);
+                    if (foreignKeyPickerChild == null || foreignKeyPickerChild.IsPopupOpen == false)
+                    {
+                        foreignKeyPicker.ClosePopup();
+                    }
                     //not set Handled because need this event to update SelectedIndex
                 }
             }
@@ -214,10 +218,15 @@ namespace SimpleDataGrid
             {
                 if (foreignKeyPicker.IsPopupOpen == true)
                 {
-                    if (e.OriginalSource is DataGridCell)
+                    var p = e.OriginalSource as DataGridCell;
+                    if (p != null)
                     {
-                        foreignKeyPicker.ClosePopup();
-                        e.Handled = true;//set Handled for not move to next row
+                        var foreignKeyPickerChild = VisualTreeUtils.FindChild<ForeignKeyPicker>(foreignKeyPicker.PopupView);
+                        if (foreignKeyPickerChild == null || foreignKeyPickerChild.IsPopupOpen == false)
+                        {
+                            foreignKeyPicker.ClosePopup();
+                            e.Handled = true;//set Handled for not move to next row
+                        }
                     }
                 }
             }

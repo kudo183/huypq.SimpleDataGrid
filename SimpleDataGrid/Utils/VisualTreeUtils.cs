@@ -15,7 +15,7 @@ namespace SimpleDataGrid
         /// <returns>The first parent item that matches the submitted type parameter. 
         /// If not matching item can be found, 
         /// a null parent is being returned.</returns>
-        public static T FindChild<T>(DependencyObject parent, string childName)
+        public static T FindChild<T>(DependencyObject parent, string childName = "")
            where T : DependencyObject
         {
             // Confirm parent and childName are valid. 
@@ -46,6 +46,14 @@ namespace SimpleDataGrid
                         // if the child's name is of the request name
                         foundChild = (T)child;
                         break;
+                    }
+                    else
+                    {
+                        // recursively drill down the tree
+                        foundChild = FindChild<T>(child, childName);
+
+                        // If the child is found, break so we do not overwrite the found child. 
+                        if (foundChild != null) break;
                     }
                 }
                 else
