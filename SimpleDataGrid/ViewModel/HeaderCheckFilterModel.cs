@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SimpleDataGrid.ViewModel
 {
@@ -8,6 +9,13 @@ namespace SimpleDataGrid.ViewModel
             : base(name, "CheckFilter", propertyName, propertyType)
         {
             FilterValue = true;
+        }
+
+        protected override void InitPredicatesList()
+        {
+            Predicates = new List<string>();
+            Predicates.Add("=");
+            Predicates.Add("!=");
         }
     }
 }

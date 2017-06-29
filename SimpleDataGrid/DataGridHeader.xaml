@@ -43,7 +43,14 @@
                     <CheckBox Margin="2,0,2,0" VerticalAlignment="Center" IsChecked="{Binding Path=IsUsed}"/>
                     <Button Content="x" Command="{Binding ClearFilterValueCommand}" Margin="0" Padding="0 -2 -1 0" Width="18" Height="18" FontSize="12"/>
                 </StackPanel>
-                <ContentPresenter Grid.Row="1" Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content}"/>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <ComboBox ItemsSource="{Binding Predicates}" SelectedItem="{Binding Predicate}"/>
+                    <ContentPresenter Grid.Column="1" Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content}" HorizontalAlignment="Stretch"/>
+                </Grid>
             </Grid>
         </ControlTemplate>
     </UserControl.Template>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace SimpleDataGrid.ViewModel
@@ -15,6 +16,9 @@ namespace SimpleDataGrid.ViewModel
         public Action ActionIsUsedChanged { get; set; }
         public Action ActionFilterValueChanged { get; set; }
         public Action ActionIsSortedChanged { get; set; }
+        public Action ActionPredicateChanged { get; set; }
+
+        public List<string> Predicates { get; set; }
 
         public enum SortDirection
         {
@@ -36,6 +40,23 @@ namespace SimpleDataGrid.ViewModel
             {
                 FilterValue = null;
             });
+            InitPredicatesList();
+            if (Predicates.Count > 0)
+            {
+                Predicate = Predicates[0];
+            }
+        }
+
+        protected virtual void InitPredicatesList()
+        {
+            Predicates = new List<string>();
+            Predicates.Add("=");
+            Predicates.Add("!=");
+            Predicates.Add(">");
+            Predicates.Add(">=");
+            Predicates.Add("<");
+            Predicates.Add("<=");
+            //Predicates.Add("IN");
         }
 
         private string _name;
@@ -122,6 +143,23 @@ namespace SimpleDataGrid.ViewModel
             }
         }
 
+        private string _predicate;
+        public string Predicate
+        {
+            get { return _predicate; }
+            set
+            {
+                if (IsSkipSet(_predicate, value) == true)
+                {
+                    return;
+                }
+
+                _predicate = value;
+                OnPropertyChanged(nameof(Predicate));
+                PropertyChangedAction(nameof(Predicate));
+            }
+        }
+
         public SimpleCommand ClearFilterValueCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -151,6 +189,11 @@ namespace SimpleDataGrid.ViewModel
             if (propertyName == nameof(IsSorted) && ActionIsSortedChanged != null)
             {
                 ActionIsSortedChanged();
+            }
+
+            if (propertyName == nameof(Predicate) && ActionPredicateChanged != null)
+            {
+                ActionPredicateChanged();
             }
         }
 
