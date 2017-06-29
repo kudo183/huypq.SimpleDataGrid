@@ -52,7 +52,7 @@ namespace SimpleDataGrid
             }
         }
 
-        public string Msg
+        public string SysMsg
         {
             get
             {

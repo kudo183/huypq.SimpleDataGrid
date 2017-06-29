@@ -20,7 +20,7 @@ namespace SimpleDataGrid.ViewModel
         void Load();
         void Save();
         void LoadReferenceData();
-        string Msg { get; set; }
+        string SysMsg { get; set; }
         object ParentItem { get; set; }
         object GetSelectedItem();
         List<HeaderFilterBaseModel> HeaderFilters { get; set; }
