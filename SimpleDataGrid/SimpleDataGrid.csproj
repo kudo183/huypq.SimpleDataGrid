@@ -47,9 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComboBoxEx.cs" />
-    <Compile Include="CustomDatePicker.xaml.cs">
-      <DependentUpon>CustomDatePicker.xaml</DependentUpon>
-    </Compile>
     <Compile Include="DataGridCheckBoxColumnExt.xaml.cs">
       <DependentUpon>DataGridCheckBoxColumnExt.xaml</DependentUpon>
     </Compile>
@@ -103,10 +100,6 @@
     <Compile Include="ViewModel\PagerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="CustomDatePicker.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="DataGridCheckBoxColumnExt.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -151,6 +144,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\huypq.wpf.controls\huypq.wpf.controls\huypq.wpf.controls.csproj">
+      <Project>{2a2ba72b-c536-419c-8741-a09e21ed70c7}</Project>
+      <Name>huypq.wpf.controls</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

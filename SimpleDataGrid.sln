@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 14 for Windows Desktop
+# Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleDataGrid", "SimpleDataGrid\SimpleDataGrid.csproj", "{9CFA4FE9-01D0-4BD1-AA8A-BCA4B4A60375}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleDataGridTest", "SimpleDataGridTest\SimpleDataGridTest.csproj", "{34F07323-CC2F-44EE-8884-B91A636768D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "huypq.wpf.controls", "..\huypq.wpf.controls\huypq.wpf.controls\huypq.wpf.controls.csproj", "{2A2BA72B-C536-419C-8741-A09E21ED70C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{34F07323-CC2F-44EE-8884-B91A636768D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34F07323-CC2F-44EE-8884-B91A636768D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34F07323-CC2F-44EE-8884-B91A636768D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A2BA72B-C536-419C-8741-A09E21ED70C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A2BA72B-C536-419C-8741-A09E21ED70C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A2BA72B-C536-419C-8741-A09E21ED70C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A2BA72B-C536-419C-8741-A09E21ED70C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using SimpleDataGrid;
+using SimpleDataGrid.ViewModel;
 
 namespace SimpleDataGridTest
 {
@@ -17,7 +21,7 @@ namespace SimpleDataGridTest
         public List<ChildData> ChildDatas { get; set; }
     }
 
-    public class TestViewModel : SimpleDataGrid.ViewModel.EditableGridViewModel<Data>
+    public class TestViewModel : SimpleDataGrid.ViewModel.IEditableGridViewModel<Data>
     {
         private List<ChildData> _childData;
         public TestViewModel()
@@ -39,7 +43,7 @@ namespace SimpleDataGridTest
                 new Data() {Id=4, ChildDataId=4, ChildDatas=_childData }
             };
 
-            Entities = new System.Collections.ObjectModel.ObservableCollection<Data>(data);
+            Entities = new ObservableCollectionEx<Data>(data);
             Entities.CollectionChanged += Entities_CollectionChanged;
             PagerViewModel = new SimpleDataGrid.ViewModel.PagerViewModel()
             {
@@ -48,6 +52,179 @@ namespace SimpleDataGridTest
                 IsEnablePaging = true,
                 ItemCount = Entities.Count
             };
+        }
+
+        public Action<object> ActionSelectedValueChanged
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public ObservableCollectionEx<Data> Entities
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public List<HeaderFilterBaseModel> HeaderFilters
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool IsValid
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public SimpleCommand LoadCommand
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public PagerViewModel PagerViewModel
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public object ParentItem
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public SimpleCommand SaveCommand
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public Data SelectedItem
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public object SelectedValue
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string SelectedValuePath
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string SysMsg
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public object GetSelectedItem()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Load()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void LoadReferenceData()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Save()
+        {
+            throw new NotImplementedException();
         }
 
         private void Entities_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)

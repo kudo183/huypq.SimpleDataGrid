@@ -3,7 +3,9 @@
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                     xmlns:SimpleDataGrid="clr-namespace:SimpleDataGrid" mc:Ignorable="d" Width="200">
+                     xmlns:SimpleDataGrid="clr-namespace:SimpleDataGrid"
+                     xmlns:CustomControl="clr-namespace:huypq.wpf.controls;assembly=huypq.wpf.controls"
+                     mc:Ignorable="d" Width="200">
     <DataGridBoundColumn.HeaderStyle>
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -14,7 +16,7 @@
                         <Setter.Value>
                             <DataTemplate>
                                 <SimpleDataGrid:DataGridHeader>
-                                    <SimpleDataGrid:CustomDatePicker Grid.Row="1"
+                                    <CustomControl:CustomDatePicker Grid.Row="1"
                                         SelectedDateBinding="{Binding Path=FilterValue}"
                                         IsEnabledBinding="{Binding Path=IsUsed}"/>
                                 </SimpleDataGrid:DataGridHeader>
