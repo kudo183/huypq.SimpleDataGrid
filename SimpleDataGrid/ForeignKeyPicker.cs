@@ -286,6 +286,11 @@ namespace SimpleDataGrid
         {
             PopupView.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
 
+            if (SelectedForeignKey == 0)
+            {
+                SetSelectedForeignKey();
+            }
+
             var iNotify = PopupView.DataContext as INotifyPropertyChanged;
             if (iNotify != null)
             {
