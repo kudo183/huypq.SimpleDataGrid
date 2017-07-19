@@ -36,21 +36,39 @@ namespace SimpleDataGrid
             menu.Items.Add(menuItem);
             ContextMenu = menu;
 
-            GotFocus += DataGridExt_GotFocus;
+            GotKeyboardFocus += DataGridExt_GotKeyboardFocus;
         }
 
-        private void DataGridExt_GotFocus(object sender, RoutedEventArgs e)
+        private void DataGridExt_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            if (_needUpdateSelectedIndexInGotFocusEvent == true)
+            var cell = e.NewFocus as DataGridCell;
+            if (cell != null)
             {
-                var cell = e.OriginalSource as DataGridCell;
-                if (cell != null)
+                if (e.OldFocus is DataGridCell)
+                {
+                    var oldGrid = GetDataGridFromChild(e.OldFocus as DependencyObject);
+                    var newGrid = GetDataGridFromChild(cell);
+                    if (oldGrid == newGrid)
+                    {
+                        return;
+                    }
+                }
+
+                if (_needUpdateSelectedIndexInGotFocusEvent)
                 {
                     var index = Items.IndexOf(CurrentCell.Item);
                     if (SelectedIndex != index)
                     {
                         _needUpdateSelectedIndexInGotFocusEvent = false;
                         SelectedIndex = index;
+                    }
+                }
+                else if ((SelectedIndex < Items.Count - 1) && SelectedIndex > 0)
+                {
+                    var index = Items.IndexOf(CurrentCell.Item);
+                    if (SelectedIndex != index)
+                    {
+                        CurrentCell = new DataGridCellInfo(Items[SelectedIndex], Columns[1]);
                     }
                 }
             }
@@ -71,6 +89,21 @@ namespace SimpleDataGrid
                     _needUpdateSelectedIndexInGotFocusEvent = true;
                 }
             }
+        }
+
+        private DataGrid GetDataGridFromChild(DependencyObject child)
+        {
+            if (child == null)
+            {
+                return null;
+            }
+            var p = VisualTreeHelper.GetParent(child);
+            var datagrid = p as DataGrid;
+            if (datagrid != null)
+            {
+                return datagrid;
+            }
+            return GetDataGridFromChild(p);
         }
 
         public IEnumerable ItemsSourceEx
