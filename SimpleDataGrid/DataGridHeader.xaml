@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SimpleDataGrid"
              xmlns:converter="clr-namespace:SimpleDataGrid.Converter"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d">
     <UserControl.Resources>
         <converter:SortDirectionToBooleanConverter x:Key="sortDirectionToBooleanConverter"/>
@@ -48,7 +49,11 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <ComboBox ItemsSource="{Binding Predicates}" SelectedItem="{Binding Predicate}"/>
+                    <ComboBox ItemsSource="{Binding Predicates}" SelectedItem="{Binding Predicate}">
+                        <ComboBox.Resources>
+                            <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">0</sys:Double>
+                        </ComboBox.Resources>
+                    </ComboBox>
                     <ContentPresenter Grid.Column="1" Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content}" HorizontalAlignment="Stretch"/>
                 </Grid>
             </Grid>
