@@ -42,15 +42,26 @@ namespace SimpleDataGrid
         {
             OnBeginReset();
 
+            if (_orderChecker == null)
+            {
+                throw new NotSupportedException("OrderChecker not set yet.");
+            }
+
             Items.Clear();
             foreach (var item in data)
             {
-                Add(item);
+                //Add(item); bad perfomance because Add method will raise CollectionChanged event
+
+                Items.Insert(FindItemIndexForInsert(item), item);
             }
 
             OnEndReset();
         }
 
+        /// <summary>
+        /// will raise CollectionChangedEvent
+        /// </summary>
+        /// <param name="item"></param>
         public new void Add(T item)
         {
             if (item == null)
@@ -62,17 +73,7 @@ namespace SimpleDataGrid
                 throw new NotSupportedException("OrderChecker not set yet.");
             }
 
-            int index = Items.Count;
-            for (int i = 0; i < Items.Count; i++)
-            {
-                if (_orderChecker(Items[i], item) == false)
-                {
-                    index = i;
-                    break;
-                }
-            }
-
-            base.InsertItem(index, item);
+            base.InsertItem(FindItemIndexForInsert(item), item);
         }
 
         [Obsolete("This is not supported in this class.", true)]
@@ -175,6 +176,21 @@ namespace SimpleDataGrid
             }
 
             return true;
+        }
+
+        private int FindItemIndexForInsert(T item)
+        {
+            int index = Items.Count;
+            for (int i = 0; i < Items.Count; i++)
+            {
+                if (_orderChecker(Items[i], item) == false)
+                {
+                    index = i;
+                    break;
+                }
+            }
+
+            return index;
         }
     }
 }
