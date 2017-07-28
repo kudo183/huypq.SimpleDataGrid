@@ -14,8 +14,6 @@ namespace SimpleDataGrid
 {
     public class DataGridExt : DataGrid
     {
-        public readonly List<int> SkippedColumnIndex = new List<int>();
-
         public bool SkippedSelectionChangedEvent = false;
 
         public DataGridExt()
@@ -241,9 +239,6 @@ namespace SimpleDataGrid
         {
             for (int i = beginDisplayIndex; i < Columns.Count; i++)
             {
-                if (SkippedColumnIndex.Contains(i) == true)
-                    continue;
-
                 var col = Columns.First(p => p.DisplayIndex == i);
 
                 if (DataGridColumnAttachedProperty.GetIsTabStop(col) == false)
