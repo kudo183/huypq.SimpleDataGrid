@@ -5,7 +5,7 @@
         static TextManager()
         {
             page = "page";
-            of = "of";
+            pages = "pages";
             rows = "rows";
             load = "Load";
             save = "Save";
@@ -13,6 +13,9 @@
         
         private static string page;
         public static string Page { get { return page; } set { page = value; } }
+
+        private static string pages;
+        public static string Pages { get { return pages; } set { pages = value; } }
 
         private static string of;
         public static string Of { get { return of; } set { of = value; } }

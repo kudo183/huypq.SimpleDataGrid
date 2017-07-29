@@ -5,13 +5,13 @@ namespace SimpleDataGrid.ViewModel
 {
     public class PagerViewModel : INotifyPropertyChanged
     {
-        private int _currentPageIndex;
+        private int _currentPageIndex = 1;
+        private int _pageSize = 30;
         private int _pageCount;
         private int _itemCount;
-        private bool _isEnablePaging;
 
         public Action ActionCurrentPageIndexChanged { get; set; }
-        public Action ActionIsEnablePagingChanged { get; set; }
+        public Action ActionPageSizeChanged { get; set; }
 
         public PagerViewModel()
         {
@@ -33,9 +33,20 @@ namespace SimpleDataGrid.ViewModel
             {
                 SetCurrentPageIndexWithoutAction(value);
 
-                if (ActionCurrentPageIndexChanged != null)
+                ActionCurrentPageIndexChanged?.Invoke();
+            }
+        }
+
+        public int PageSize
+        {
+            get { return _pageSize; }
+            set
+            {
+                if (_pageSize != value)
                 {
-                    ActionCurrentPageIndexChanged();
+                    _pageSize = value;
+                    OnPropertyChanged("PageSize");
+                    ActionPageSizeChanged?.Invoke();
                 }
             }
         }
@@ -67,24 +78,7 @@ namespace SimpleDataGrid.ViewModel
                 }
             }
         }
-
-        public bool IsEnablePaging
-        {
-            get { return _isEnablePaging; }
-            set
-            {
-                if (_isEnablePaging != value)
-                {
-                    _isEnablePaging = value;
-                    OnPropertyChanged("IsEnablePaging");
-                    if (ActionIsEnablePagingChanged != null)
-                    {
-                        ActionIsEnablePagingChanged();
-                    }
-                }
-            }
-        }
-
+        
         public SimpleCommand PrevCommand { get; private set; }
         public SimpleCommand NextCommand { get; private set; }
 
@@ -92,8 +86,7 @@ namespace SimpleDataGrid.ViewModel
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public void SetCurrentPageIndexWithoutAction(int value)
