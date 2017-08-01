@@ -35,6 +35,28 @@ namespace SimpleDataGrid
             ContextMenu = menu;
 
             GotKeyboardFocus += DataGridExt_GotKeyboardFocus;
+            Loaded += DataGridExt_Loaded;
+            Unloaded += DataGridExt_Unloaded;
+        }
+
+        private bool _isLoaded = false;
+        private bool _needUpdateSelectedIndexInGotFocusEvent = false;
+        private bool _needUpdateCurrentCellInGotFocusEvent = false;
+
+        private void DataGridExt_Unloaded(object sender, RoutedEventArgs e)
+        {
+            _isLoaded = false;
+        }
+
+        private void DataGridExt_Loaded(object sender, RoutedEventArgs e)
+        {
+            //don't know why Loaded event fire two time, so need flag _isLoaded
+            if (_isLoaded == true)
+                return;
+
+            _isLoaded = true;
+            //CurrentCell not set to correct SelectedIndex when load -> need update CurrentCell in GotFocus
+            _needUpdateCurrentCellInGotFocusEvent = true;
         }
 
         private void DataGridExt_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
@@ -42,37 +64,31 @@ namespace SimpleDataGrid
             var cell = e.NewFocus as DataGridCell;
             if (cell != null)
             {
-                if (e.OldFocus is DataGridCell)
-                {
-                    var oldGrid = GetDataGridFromChild(e.OldFocus as DependencyObject);
-                    var newGrid = GetDataGridFromChild(cell);
-                    if (oldGrid == newGrid)
-                    {
-                        return;
-                    }
-                }
-
                 if (_needUpdateSelectedIndexInGotFocusEvent)
                 {
+                    _needUpdateSelectedIndexInGotFocusEvent = false;
+
                     var index = Items.IndexOf(CurrentCell.Item);
                     if (SelectedIndex != index)
                     {
-                        _needUpdateSelectedIndexInGotFocusEvent = false;
                         SelectedIndex = index;
                     }
                 }
-                else if ((SelectedIndex < Items.Count - 1) && SelectedIndex > 0)
+                else if (_needUpdateCurrentCellInGotFocusEvent == true)
                 {
-                    var index = Items.IndexOf(CurrentCell.Item);
-                    if (SelectedIndex != index)
+                    _needUpdateCurrentCellInGotFocusEvent = false;
+
+                    if ((SelectedIndex < Items.Count - 1) && SelectedIndex > 0)
                     {
-                        CurrentCell = new DataGridCellInfo(Items[SelectedIndex], Columns[1]);
+                        var index = Items.IndexOf(CurrentCell.Item);
+                        if (SelectedIndex != index)
+                        {
+                            CurrentCell = new DataGridCellInfo(Items[SelectedIndex], Columns[1]);
+                        }
                     }
                 }
             }
         }
-
-        private bool _needUpdateSelectedIndexInGotFocusEvent = false;
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
@@ -89,20 +105,20 @@ namespace SimpleDataGrid
             }
         }
 
-        private DataGrid GetDataGridFromChild(DependencyObject child)
-        {
-            if (child == null)
-            {
-                return null;
-            }
-            var p = VisualTreeHelper.GetParent(child);
-            var datagrid = p as DataGrid;
-            if (datagrid != null)
-            {
-                return datagrid;
-            }
-            return GetDataGridFromChild(p);
-        }
+        //private DataGrid GetDataGridFromChild(DependencyObject child)
+        //{
+        //    if (child == null)
+        //    {
+        //        return null;
+        //    }
+        //    var p = VisualTreeHelper.GetParent(child);
+        //    var datagrid = p as DataGrid;
+        //    if (datagrid != null)
+        //    {
+        //        return datagrid;
+        //    }
+        //    return GetDataGridFromChild(p);
+        //}
 
         public IEnumerable ItemsSourceEx
         {
