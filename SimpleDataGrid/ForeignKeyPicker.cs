@@ -101,6 +101,8 @@ namespace SimpleDataGrid
             }
 
             fp.textBox.Text = fp.SelectedForeignKey.ToString();
+
+            fp.SetPopupViewSelectedValue(fp.SelectedForeignKey);
         }
 
         static ForeignKeyPicker()
@@ -108,6 +110,7 @@ namespace SimpleDataGrid
             EventManager.RegisterClassHandler(typeof(ForeignKeyPicker), UIElement.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(OnMouseLeftButtonDown));
             EventManager.RegisterClassHandler(typeof(ForeignKeyPicker), UIElement.PreviewKeyDownEvent, new KeyEventHandler(OnPreviewKeyDown));
             EventManager.RegisterClassHandler(typeof(ForeignKeyPicker), UIElement.KeyDownEvent, new KeyEventHandler(OnKeyDown));
+            EventManager.RegisterClassHandler(typeof(ForeignKeyPicker), UserControl.LoadedEvent, new RoutedEventHandler(OnLoaded));
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ForeignKeyPicker), new FrameworkPropertyMetadata(typeof(ForeignKeyPicker)));
             //KeyboardNavigation.TabNavigationProperty.OverrideMetadata(typeof(ForeignKeyPicker), new FrameworkPropertyMetadata(KeyboardNavigationMode.Once));
             KeyboardNavigation.IsTabStopProperty.OverrideMetadata(typeof(ForeignKeyPicker), new FrameworkPropertyMetadata(false));
@@ -192,6 +195,18 @@ namespace SimpleDataGrid
             }
         }
 
+        private static void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var foreignKeyPicker = sender as ForeignKeyPicker;
+            foreignKeyPicker.PopupView.Loaded -= foreignKeyPicker.PopupView_Loaded;
+            foreignKeyPicker.PopupView.Loaded += foreignKeyPicker.PopupView_Loaded;            
+        }
+
+        public void PopupView_Loaded(object sender, RoutedEventArgs e)
+        {
+            SetPopupViewSelectedValue(SelectedForeignKey);
+        }
+
         private static void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var foreignKeyPicker = sender as ForeignKeyPicker;
@@ -252,6 +267,14 @@ namespace SimpleDataGrid
             if (textBox.Text != text)
             {
                 SetCurrentValue(SelectedForeignKeyProperty, int.Parse(textBox.Text));
+                SetPopupViewSelectedValue(SelectedForeignKey);
+            }
+        }
+
+        private void SetPopupViewSelectedValue(int value)
+        {
+            if (PopupView != null)
+            {
                 var p = PopupView.DataContext.GetType().GetProperty(PopupViewSelectedIDPath);
                 p.SetValue(PopupView.DataContext, SelectedForeignKey);
             }
