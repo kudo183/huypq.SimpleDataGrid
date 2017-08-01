@@ -199,7 +199,7 @@ namespace SimpleDataGrid
         {
             var foreignKeyPicker = sender as ForeignKeyPicker;
             foreignKeyPicker.PopupView.Loaded -= foreignKeyPicker.PopupView_Loaded;
-            foreignKeyPicker.PopupView.Loaded += foreignKeyPicker.PopupView_Loaded;            
+            foreignKeyPicker.PopupView.Loaded += foreignKeyPicker.PopupView_Loaded;
         }
 
         public void PopupView_Loaded(object sender, RoutedEventArgs e)
