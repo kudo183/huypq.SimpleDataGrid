@@ -104,6 +104,8 @@ namespace SimpleDataGrid
             }
         }
 
+        public Action<object, string> ShowDialogAction { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void Load()

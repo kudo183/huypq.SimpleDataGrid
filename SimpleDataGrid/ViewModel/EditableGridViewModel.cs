@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace SimpleDataGrid.ViewModel
@@ -16,6 +17,7 @@ namespace SimpleDataGrid.ViewModel
         PagerViewModel PagerViewModel { get; set; }
         SimpleCommand LoadCommand { get; set; }
         SimpleCommand SaveCommand { get; set; }
+        Action<object, string> ShowDialogAction { get; set; }
         bool IsValid { get; set; }
         void Load();
         void Save();
