@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using SimpleDataGrid;
 using SimpleDataGrid.ViewModel;
+using huypq.wpf.Utils;
 
 namespace SimpleDataGridTest
 {
@@ -21,7 +22,7 @@ namespace SimpleDataGridTest
         public List<ChildData> ChildDatas { get; set; }
     }
 
-    public class TestViewModel : SimpleDataGrid.ViewModel.IEditableGridViewModel<Data>
+    public class TestViewModel : IEditableGridViewModel<Data>
     {
         private List<ChildData> _childData;
         public TestViewModel()
@@ -45,11 +46,11 @@ namespace SimpleDataGridTest
 
             Entities = new ObservableCollectionEx<Data>(data);
             Entities.CollectionChanged += Entities_CollectionChanged;
-            PagerViewModel = new SimpleDataGrid.ViewModel.PagerViewModel()
+            PagerViewModel = new PagerViewModel()
             {
                 CurrentPageIndex = 1,
                 PageCount = 1,
-                IsEnablePaging = true,
+                PageSize = 30,
                 ItemCount = Entities.Count
             };
         }
@@ -204,6 +205,8 @@ namespace SimpleDataGridTest
                 throw new NotImplementedException();
             }
         }
+
+        public Action<object, string> ShowDialogAction { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

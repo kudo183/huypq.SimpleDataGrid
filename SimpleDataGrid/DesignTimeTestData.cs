@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using SimpleDataGrid.ViewModel;
+using huypq.wpf.Utils;
 
 namespace SimpleDataGrid
 {

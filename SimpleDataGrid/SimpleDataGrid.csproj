@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SimpleDataGrid</RootNamespace>
     <AssemblyName>SimpleDataGrid</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -86,10 +87,7 @@
       <DependentUpon>Test.xaml</DependentUpon>
     </Compile>
     <Compile Include="TextManager.cs" />
-    <Compile Include="Utils\SimpleCommand.cs" />
     <Compile Include="TextBoxExt.cs" />
-    <Compile Include="Utils\DataBinderUtils.cs" />
-    <Compile Include="Utils\VisualTreeUtils.cs" />
     <Compile Include="ViewModel\EditableGridViewModel.cs" />
     <Compile Include="ViewModel\HeaderForeignKeyFilterModel.cs" />
     <Compile Include="ViewModel\HeaderCheckFilterModel.cs" />
@@ -146,6 +144,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\huypq.dotnet.lib\huypq.wpf.Utils\huypq.wpf.Utils\huypq.wpf.Utils.csproj">
+      <Project>{b3180065-6e2e-4ec4-9d02-e8d43d93808a}</Project>
+      <Name>huypq.wpf.Utils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\huypq.wpf.controls\huypq.wpf.controls\huypq.wpf.controls.csproj">
       <Project>{2a2ba72b-c536-419c-8741-a09e21ed70c7}</Project>
       <Name>huypq.wpf.controls</Name>

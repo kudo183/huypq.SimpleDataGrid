@@ -9,6 +9,7 @@ using System.Windows.Media;
 using SimpleDataGrid.ViewModel;
 using System.Collections;
 using System.Linq;
+using huypq.wpf.Utils;
 
 namespace SimpleDataGrid
 {
@@ -465,23 +466,23 @@ namespace SimpleDataGrid
                     switch (binding.Type)
                     {
                         case 0:
-                            row.Add(DataBinderUtils.Eval(item, binding.Path));
+                            row.Add(BindingUtils.Eval(item, binding.Path));
                             break;
                         case 1:
-                            var itemsSource = DataBinderUtils.Eval(item, binding.ItemsSourcePath) as IEnumerable;
+                            var itemsSource = BindingUtils.Eval(item, binding.ItemsSourcePath) as IEnumerable;
                             if (itemsSource == null)
                             {
                                 row.Add(null);
                                 break;
                             }
 
-                            var v = DataBinderUtils.Eval(item, binding.Path);
+                            var v = BindingUtils.Eval(item, binding.Path);
                             foreach (var comboBoxItem in itemsSource)
                             {
-                                var v1 = DataBinderUtils.Eval(comboBoxItem, binding.SelectedValuePath);
+                                var v1 = BindingUtils.Eval(comboBoxItem, binding.SelectedValuePath);
                                 if (v.Equals(v1) == true)
                                 {
-                                    row.Add(DataBinderUtils.Eval(comboBoxItem, binding.DisplayPath));
+                                    row.Add(BindingUtils.Eval(comboBoxItem, binding.DisplayPath));
                                     break;
                                 }
                             }
