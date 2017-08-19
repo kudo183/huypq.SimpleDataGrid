@@ -58,22 +58,7 @@ namespace SimpleDataGridTest
 
             DataContext = ViewModel;
 
-            for (int i = 0; i < ViewModel.HeaderFilters.Count; i++)
-            {
-                var filter = ViewModel.HeaderFilters[i];
-                if (filter.IsShowInUI == false)
-                {
-                    continue;
-                }
-                foreach (var column in gridView.Columns)
-                {
-                    if (column.Header.ToString() == filter.PropertyName)
-                    {
-                        column.Header = filter;
-                        break;
-                    }
-                }
-            }
+            gridView.MapHeaderFilterModelToColumnHeader(ViewModel);
 
             base.OnInitialized(e);
         }

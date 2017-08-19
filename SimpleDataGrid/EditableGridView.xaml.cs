@@ -35,6 +35,27 @@ namespace SimpleDataGrid
             InitializeComponent();
         }
 
+        public void MapHeaderFilterModelToColumnHeader<T>(ViewModel.EditableGridViewModel<T> viewModel) where T : class
+        {
+            for (int i = 0; i < viewModel.HeaderFilters.Count; i++)
+            {
+                var filter = viewModel.HeaderFilters[i];
+                if (filter.IsShowInUI == false)
+                {
+                    continue;
+                }
+                foreach (var column in Columns)
+                {
+                    if (column.Header.ToString() == filter.PropertyName)
+                    {
+                        column.Header = filter;
+                        break;
+                    }
+                }
+            }
+
+        }
+
         public DataGridColumn FindColumn(string columnName)
         {
             foreach (var column in Columns)
