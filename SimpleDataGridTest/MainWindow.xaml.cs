@@ -1,4 +1,6 @@
-﻿using System;
+﻿using huypq.wpf.Utils;
+using SimpleDataGrid;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,32 +22,60 @@ namespace SimpleDataGridTest
     /// </summary>
     public partial class MainWindow : Window
     {
+        TestViewModel ViewModel;
         public MainWindow()
         {
             InitializeComponent();
 
-            DataContext = new TestViewModel();
         }
 
-        private void EditableGridView_Click(object sender, RoutedEventArgs e)
+        protected override void OnInitialized(EventArgs e)
         {
-            var button = e.OriginalSource as Button;
-            if (button == null)
-                return;
-
-            if (button.Tag == null)
-                return;
-
-            var buttonName = button.Tag.ToString();
-            switch (buttonName)
+            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(new DependencyObject()) == true)
             {
-                case "btnSave":
-                    Console.WriteLine("Save");
-                    break;
-                case "btnCancel":
-                    Console.WriteLine("Cancel");
-                    break;
+                return;
             }
+
+            ViewModel = new TestViewModel();
+
+            ViewModel.ShowDialogAction = (content, title) =>
+            {
+                var w = new Window()
+                {
+                    Title = title,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                    Content = content,
+                    Owner = Window.GetWindow(this)
+                };
+                w.ShowDialog();
+            };
+
+            ViewModel.LoadCommand = new SimpleCommand("LoadCommand", () =>
+            {
+                gridView.dataGrid.CommitEdit(DataGridEditingUnit.Row, true);
+                ViewModel.Load();
+            });
+
+            DataContext = ViewModel;
+
+            for (int i = 0; i < ViewModel.HeaderFilters.Count; i++)
+            {
+                var filter = ViewModel.HeaderFilters[i];
+                if (filter.IsShowInUI == false)
+                {
+                    continue;
+                }
+                foreach (var column in gridView.Columns)
+                {
+                    if (column.Header.ToString() == filter.PropertyName)
+                    {
+                        column.Header = filter;
+                        break;
+                    }
+                }
+            }
+
+            base.OnInitialized(e);
         }
     }
 }

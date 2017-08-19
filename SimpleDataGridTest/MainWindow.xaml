@@ -7,15 +7,15 @@
         xmlns:SimpleDataGrid="clr-namespace:SimpleDataGrid;assembly=SimpleDataGrid"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <SimpleDataGrid:EditableGridView x:Name="gridView" Button.Click="EditableGridView_Click">
+    <SimpleDataGrid:EditableGridView x:Name="gridView">
         <SimpleDataGrid:EditableGridView.Columns>
+            <SimpleDataGrid:DataGridTextColumnExt Width="80" Header="ID" IsReadOnly="True" Binding="{Binding ID, Mode=OneWay}"/>
+            <SimpleDataGrid:DataGridDateColumn Width="200" Header="Date" IsReadOnly="False" Binding="{Binding Date, Mode=TwoWay}"/>
             <SimpleDataGrid:DataGridComboBoxColumnExt Width="100"
-                                                      Header="Combobox"
-                                                      TextBinding="{Binding ChildData.Id, Mode=OneWay}"
+                                                      Header="ChildDataID"
+                                                      SelectedValuePath="ID"
                                                       DisplayMemberPath="Name"
-                                                      SelectedValuePath="Id"
-                                                      SelectedValueBinding="{Binding ChildDataId, UpdateSourceTrigger=PropertyChanged}"
-                                                      SelectedItemBinding="{Binding ChildData, UpdateSourceTrigger=PropertyChanged}"
+                                                      SelectedValueBinding="{Binding ChildDataID, UpdateSourceTrigger=PropertyChanged}"
                                                       ItemsSource="{Binding ChildDatas}"/>
         </SimpleDataGrid:EditableGridView.Columns>
     </SimpleDataGrid:EditableGridView>

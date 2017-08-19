@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "huypq.wpf.controls", "..\hu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "huypq.wpf.Utils", "..\huypq.dotnet.lib\huypq.wpf.Utils\huypq.wpf.Utils\huypq.wpf.Utils.csproj", "{B3180065-6E2E-4EC4-9D02-E8D43D93808A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "huypq.QueryBuilder.Framework", "..\huypq.dotnet.lib\huypq.QueryBuilder\huypq.QueryBuilder.Framework\huypq.QueryBuilder.Framework.csproj", "{C3B36888-E0F1-4E30-8549-50D20DD636C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{B3180065-6E2E-4EC4-9D02-E8D43D93808A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3180065-6E2E-4EC4-9D02-E8D43D93808A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3180065-6E2E-4EC4-9D02-E8D43D93808A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3B36888-E0F1-4E30-8549-50D20DD636C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3B36888-E0F1-4E30-8549-50D20DD636C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3B36888-E0F1-4E30-8549-50D20DD636C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3B36888-E0F1-4E30-8549-50D20DD636C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
