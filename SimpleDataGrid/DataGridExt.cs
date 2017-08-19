@@ -207,15 +207,20 @@ namespace SimpleDataGrid
                     {
                         SelectedValue = null;
                     }
-                    else
+                    else if (string.IsNullOrEmpty(SelectedValuePath) == false)
                     {
                         var i = 0;
+
                         foreach (var item in ItemsSourceEx)
                         {
                             if (i == index)
                             {
                                 var p = item.GetType().GetProperty(SelectedValuePath);
-                                SelectedValue = p.GetValue(item);
+                                if (p != null)
+                                {
+                                    SelectedValue = p.GetValue(item);
+                                }
+                                break;
                             }
                             i++;
                         }
