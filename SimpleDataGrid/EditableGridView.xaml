@@ -40,7 +40,7 @@
                     <Button x:Name="btnSave" Content="{x:Static SimpleDataGrid:TextManager.Save}" VerticalAlignment="Top" Width="75" Margin="5" Command="{Binding SaveCommand}"/>
                     <Button x:Name="btnLoad" Content="{x:Static SimpleDataGrid:TextManager.Load}" VerticalAlignment="Top" Width="75" Margin="5" Command="{Binding LoadCommand}"/>
                 </StackPanel>
-                <TextBlock Text="{Binding Msg}" FontSize="12" Foreground="Blue" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding Msg}" Foreground="Blue" VerticalAlignment="Center"/>
             </StackPanel>
             <TextBlock Text="{Binding SysMsg}" FontSize="12" Foreground="Red"/>
         </StackPanel>
