@@ -70,8 +70,8 @@ namespace SimpleDataGrid.ViewModel
         private string sysMsg;
         public string SysMsg
         {
-            get { return string.Format("{0:hh:mm:ss.fff}  {1}", DateTime.Now, sysMsg); }
-            set { SetField(ref sysMsg, value); }
+            get { return sysMsg; }
+            set { SetField(ref sysMsg, string.Format("{0:hh:mm:ss.fff}  {1}", DateTime.Now, value)); }
         }
 
         public List<HeaderFilterBaseModel> HeaderFilters { get; set; }
