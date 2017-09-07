@@ -56,6 +56,12 @@ namespace SimpleDataGridTest
                 ViewModel.Load();
             });
 
+            ViewModel.SaveCommand = new SimpleCommand("SaveCommand", () =>
+            {
+                gridView.dataGrid.CommitEdit(DataGridEditingUnit.Row, true);
+                ViewModel.Save();
+            });
+
             DataContext = ViewModel;
 
             gridView.MapHeaderFilterModelToColumnHeader(ViewModel);

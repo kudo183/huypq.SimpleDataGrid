@@ -6,6 +6,7 @@ using SimpleDataGrid.ViewModel;
 using huypq.wpf.Utils;
 using huypq.QueryBuilder;
 using System.Linq;
+using System.IO;
 
 namespace SimpleDataGridTest
 {
@@ -20,8 +21,15 @@ namespace SimpleDataGridTest
         public int ID { get; set; }
         public DateTime Date { get; set; }
         public int ChildDataID { get; set; }
+        public string ImagePath { get; set; }
+        public Stream ImageStream { get; set; }
 
         public List<ChildData> ChildDatas { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("ID {0} Date {1} ChildDataID {2} ImagePath {3}", ID, Date, ChildDataID, ImagePath);
+        }
     }
 
     public class TestViewModel : EditableGridViewModel<Data>
@@ -32,6 +40,7 @@ namespace SimpleDataGridTest
         HeaderFilterBaseModel _idFilter;
         HeaderFilterBaseModel _dateFilter;
         HeaderFilterBaseModel _childIDFilter;
+
         public TestViewModel() : base()
         {
             SelectedValuePath = nameof(Data.ID);
@@ -46,7 +55,16 @@ namespace SimpleDataGridTest
             var now = DateTime.Now.Date;
             for (var i = 1; i < 51; i++)
             {
-                _data.Add(new Data() { ID = i, Date = now.AddDays(i), ChildDataID = i, ChildDatas = _childData });
+                var data = new Data() { ID = i, Date = now.AddDays(i), ChildDataID = i, ChildDatas = _childData };
+                if (i == 5)
+                {
+                    data.ImageStream = new MemoryStream(System.IO.File.ReadAllBytes(@"C:\Users\Public\Pictures\Sample Pictures\Tulipsx.jpg"));
+                }
+                else if (i == 2)
+                {
+                    data.ImagePath = @"C:\Users\Public\Pictures\Sample Pictures\Chrysanthemum.jpg";
+                }
+                _data.Add(data);
             }
 
             _idFilter = new HeaderTextFilterModel("ID", nameof(Data.ID), typeof(int));
@@ -86,6 +104,14 @@ namespace SimpleDataGridTest
             PagerViewModel.SetCurrentPageIndexWithoutAction(qe.PageIndex);
 
             SysMsg = "OK";
+        }
+
+        public override void Save()
+        {
+            foreach (var item in Entities)
+            {
+                Console.WriteLine(item.ToString());
+            }
         }
     }
 }
