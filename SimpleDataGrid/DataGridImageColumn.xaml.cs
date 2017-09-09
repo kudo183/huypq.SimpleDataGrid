@@ -51,8 +51,11 @@ namespace SimpleDataGrid
         {
             var element = new ImagePicker();
             element.IsEditable = false;
-            element.SetBinding(ImagePicker.FilePathProperty, Binding);
+
+            //the binding order of FilePath and ImageStream is important because the dependent of its. Must set ImageStream binding before FilePath binding because if set FilePath fisrt, ImageStream create by FilePath will be overrided by ImageStream binding value
             element.SetBinding(ImagePicker.ImageStreamProperty, ImageStreamBinding);
+            element.SetBinding(ImagePicker.FilePathProperty, Binding);
+
             return element;
         }
 
@@ -60,8 +63,11 @@ namespace SimpleDataGrid
         {
             var element = new ImagePicker();
             element.IsEditable = true;
-            element.SetBinding(ImagePicker.FilePathProperty, Binding);
+
+            //the binding order of FilePath and ImageStream is important because the dependent of its. Must set ImageStream binding before FilePath binding because if set FilePath fisrt, ImageStream create by FilePath will be overrided by ImageStream binding value
             element.SetBinding(ImagePicker.ImageStreamProperty, ImageStreamBinding);
+            element.SetBinding(ImagePicker.FilePathProperty, Binding);
+
             return element;
         }
     }
