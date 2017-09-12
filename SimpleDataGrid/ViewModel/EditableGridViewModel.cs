@@ -140,6 +140,10 @@ namespace SimpleDataGrid.ViewModel
 
         protected virtual void AfterLoad() { }
 
+        protected virtual void BeforeSave() { }
+
+        protected virtual void AfterSave() { }
+
         protected List<WhereExpression.IWhereOption> WhereOptionsFromHeaderFilter(
             List<HeaderFilterBaseModel> headerFilters)
         {
