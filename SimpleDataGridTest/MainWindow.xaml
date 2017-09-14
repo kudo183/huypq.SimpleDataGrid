@@ -11,7 +11,7 @@
         <SimpleDataGrid:EditableGridView.Columns>
             <SimpleDataGrid:DataGridTextColumnExt Width="80" Header="ID" IsReadOnly="True" Binding="{Binding ID, Mode=OneWay}"/>
             <SimpleDataGrid:DataGridDateColumn Width="200" Header="Date" IsReadOnly="False" Binding="{Binding Date, Mode=TwoWay}"/>
-            <SimpleDataGrid:DataGridImageColumn Width="200" Header="Image" IsReadOnly="False" Binding="{Binding ImagePath, Mode=TwoWay}" ImageStreamBinding="{Binding ImageStream}"/>
+            <SimpleDataGrid:DataGridImageColumn Width="200" Header="Image" IsReadOnly="False" Binding="{Binding ImagePath}" ImageStreamBinding="{Binding ImageStream}"/>
             <SimpleDataGrid:DataGridComboBoxColumnExt Width="100"
                                                       Header="ChildDataID"
                                                       SelectedValuePath="ID"

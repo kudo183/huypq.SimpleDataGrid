@@ -29,8 +29,8 @@ namespace SimpleDataGrid
             var ip = editingElement as ImagePicker;
             if (ip != null)
             {
-                var exp = ip.GetBindingExpression(ImagePicker.FilePathProperty);
-                exp.UpdateTarget();
+                ip.GetBindingExpression(ImagePicker.ImageStreamProperty).UpdateTarget();
+                ip.GetBindingExpression(ImagePicker.FilePathProperty).UpdateTarget();
             }
         }
 
@@ -39,8 +39,8 @@ namespace SimpleDataGrid
             var ip = editingElement as ImagePicker;
             if (ip != null)
             {
-                var exp = ip.GetBindingExpression(ImagePicker.FilePathProperty);
-                exp.UpdateSource();
+                ip.GetBindingExpression(ImagePicker.ImageStreamProperty).UpdateSource();
+                ip.GetBindingExpression(ImagePicker.FilePathProperty).UpdateSource();
                 return !Validation.GetHasError(ip);
             }
 
