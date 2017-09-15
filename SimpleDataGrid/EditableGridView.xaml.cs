@@ -56,6 +56,20 @@ namespace SimpleDataGrid
 
         }
 
+        public int FindColumnIndex(string columnName)
+        {
+            for (int i = 0; i < Columns.Count; i++)
+            {
+                var column = Columns[i];
+                var vm = column.Header as ViewModel.HeaderFilterBaseModel;
+                if (vm != null && vm.PropertyName == columnName)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
         public DataGridColumn FindColumn(string columnName)
         {
             foreach (var column in Columns)
