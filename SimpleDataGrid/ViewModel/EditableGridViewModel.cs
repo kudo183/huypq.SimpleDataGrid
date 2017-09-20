@@ -93,7 +93,7 @@ namespace SimpleDataGrid.ViewModel
         {
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
             {
-                ProcessNewAddedDto(e.NewItems[0] as T);
+                ProcessNewAddedDataModel(e.NewItems[0] as T);
             }
         }
 
@@ -132,9 +132,9 @@ namespace SimpleDataGrid.ViewModel
             AfterCloseDialogAction?.Invoke();
         }
 
-        protected virtual void ProcessDtoBeforeAddToEntities(T dto) { }
+        protected virtual void ProcessDataModelBeforeAddToEntities(T dto) { }
 
-        protected virtual void ProcessNewAddedDto(T dto) { }
+        protected virtual void ProcessNewAddedDataModel(T dto) { }
 
         protected virtual void BeforeLoad() { }
 
