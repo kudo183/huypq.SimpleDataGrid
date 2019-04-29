@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComboBoxEx.cs" />
+    <Compile Include="Converter\ByteArrayToBase64TextConverter.cs" />
     <Compile Include="DataGridCheckBoxColumnExt.xaml.cs">
       <DependentUpon>DataGridCheckBoxColumnExt.xaml</DependentUpon>
     </Compile>
@@ -70,6 +71,9 @@
     </Compile>
     <Compile Include="DataGridRightAlignTextColumn.xaml.cs">
       <DependentUpon>DataGridRightAlignTextColumn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataGridByteArrayColumn.xaml.cs">
+      <DependentUpon>DataGridByteArrayColumn.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataGridTextColumnExt.xaml.cs">
       <DependentUpon>DataGridTextColumnExt.xaml</DependentUpon>
@@ -127,6 +131,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DataGridRightAlignTextColumn.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataGridByteArrayColumn.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
