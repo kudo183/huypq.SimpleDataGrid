@@ -82,15 +82,15 @@ namespace SimpleDataGrid
 
         private bool _disablePopupReopen;
 
-        public int SelectedForeignKey
+        public int? SelectedForeignKey
         {
-            get { return (int)GetValue(SelectedForeignKeyProperty); }
+            get { return (int?)GetValue(SelectedForeignKeyProperty); }
             set { SetValue(SelectedForeignKeyProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for SelectedForeignKey.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedForeignKeyProperty =
-            DependencyProperty.Register("SelectedForeignKey", typeof(int), typeof(ForeignKeyPicker), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedForeignKeyChanged));
+            DependencyProperty.Register("SelectedForeignKey", typeof(int?), typeof(ForeignKeyPicker), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedForeignKeyChanged));
 
         private static void OnSelectedForeignKeyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -272,7 +272,7 @@ namespace SimpleDataGrid
             }
         }
 
-        private void SetPopupViewSelectedValue(int value)
+        private void SetPopupViewSelectedValue(int? value)
         {
             if (PopupView != null)
             {
