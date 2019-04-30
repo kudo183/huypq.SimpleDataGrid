@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComboBoxEx.cs" />
+    <Compile Include="Converter\ByteArrayToHexTextConverter.cs" />
     <Compile Include="Converter\ByteArrayToBase64TextConverter.cs" />
     <Compile Include="DataGridCheckBoxColumnExt.xaml.cs">
       <DependentUpon>DataGridCheckBoxColumnExt.xaml</DependentUpon>

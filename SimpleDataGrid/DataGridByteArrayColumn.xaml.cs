@@ -10,7 +10,11 @@ namespace SimpleDataGrid
     /// </summary>
     public partial class DataGridByteArrayColumn : DataGridTextColumn
     {
-        static ByteArrayToBase64TextConverter _converter = new ByteArrayToBase64TextConverter();
+        static ByteArrayToBase64TextConverter _base64Converter;
+        static ByteArrayToHexTextConverter _hexConverter;
+
+        IValueConverter _converter;
+
         public DataGridByteArrayColumn()
         {
             InitializeComponent();
@@ -19,6 +23,14 @@ namespace SimpleDataGrid
         protected override void OnBindingChanged(BindingBase oldBinding, BindingBase newBinding)
         {
             base.OnBindingChanged(oldBinding, newBinding);
+            if (_converter == null)
+            {
+                if (_hexConverter == null)
+                {
+                    _hexConverter = new ByteArrayToHexTextConverter();
+                }
+                _converter = _hexConverter;
+            }
             (newBinding as System.Windows.Data.Binding).Converter = _converter;
         }
 
@@ -33,10 +45,19 @@ namespace SimpleDataGrid
             EditingElementStyle = editingElementStyle;
         }
 
-        public void SetStyleAsRightAlignIntegerNumber()
+        public void SetBase64Converter()
         {
-            Binding.StringFormat = "{0:N0}";
-            SetStyleAsRightAlign();
+            if (_base64Converter == null)
+            {
+                _base64Converter = new ByteArrayToBase64TextConverter();
+            }
+
+            _converter = _base64Converter;
+
+            if (Binding != null)
+            {
+                (Binding as System.Windows.Data.Binding).Converter = _converter;
+            }
         }
     }
 }
