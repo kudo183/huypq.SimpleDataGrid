@@ -32,6 +32,11 @@ namespace SimpleDataGrid.Converter
 
         private static string ByteArrayToHexViaLookup32(byte[] bytes)
         {
+            if (bytes == null || bytes.Length == 0)
+            {
+                return string.Empty;
+            }
+
             var lookup32 = _lookup32;
             var result = new char[bytes.Length * 2];
             for (int i = 0; i < bytes.Length; i++)
