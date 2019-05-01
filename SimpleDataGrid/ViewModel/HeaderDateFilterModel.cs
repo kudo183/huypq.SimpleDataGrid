@@ -8,7 +8,6 @@ namespace SimpleDataGrid.ViewModel
             : base(name, "DateFilter", propertyName, propertyType)
         {
             FilterValue = System.DateTime.Now.Date;
-            IsUsed = true;
         }
     }
 }
