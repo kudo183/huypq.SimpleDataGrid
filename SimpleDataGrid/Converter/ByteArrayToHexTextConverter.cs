@@ -14,7 +14,7 @@ namespace SimpleDataGrid.Converter
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             var hexString = (string)value;
-            return System.Convert.ToByte(hexString, 16);
+            return ParseHexString(hexString);
         }
 
         private static readonly uint[] _lookup32 = CreateLookup32();
@@ -46,6 +46,24 @@ namespace SimpleDataGrid.Converter
                 result[2 * i + 1] = (char)(val >> 16);
             }
             return new string(result);
+        }
+
+        private static byte[] ParseHexString(string hex)
+        {
+            if (hex.Length % 2 != 0)
+            {
+                hex = hex.Insert(0, "0");
+            }
+            var result = new byte[hex.Length / 2];
+            int resultIndex = 0;
+            string s;
+            for (int i = 0; i < hex.Length; i += 2)
+            {
+                s = hex.Substring(i, 2);
+                result[resultIndex] = byte.Parse(s, System.Globalization.NumberStyles.HexNumber);
+                resultIndex++;
+            }
+            return result;
         }
     }
 }
